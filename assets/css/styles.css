@@ -633,3 +633,38 @@ textarea:focus-visible,summary:focus-visible,[tabindex]:focus-visible{
   .reveal{opacity:1!important;transform:none!important}
   .to-top,.feat:hover,.news:hover,.act-card:hover,.prog:hover,.life-tile:hover{transition:none!important}
 }
+
+/* =====================================================================
+   POPUP FORMS — Admission Enquiry & Campus Visit
+   ===================================================================== */
+.form-modal{position:fixed;inset:0;z-index:1400;display:none;align-items:center;justify-content:center;padding:1.2rem}
+.form-modal.open{display:flex}
+.fm-overlay{position:absolute;inset:0;background:rgba(8,20,12,.72)}
+.fm-dialog{position:relative;z-index:2;width:min(560px,100%);max-height:92vh;overflow-y:auto;background:#fff;
+  border-radius:18px;box-shadow:var(--sh3);padding:1.7rem 1.6rem 1.9rem}
+.fm-close{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:none;
+  background:var(--bg-soft);color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:3}
+.fm-close:hover{background:var(--green-tint)}
+.fm-close .sym{font-size:1.4rem}
+.fm-head{margin-bottom:1.3rem;padding-right:2.5rem}
+.fm-head h2{font-family:'Poppins',sans-serif;font-size:1.45rem;color:var(--ink);margin-bottom:.25rem}
+.fm-head p{font-size:.9rem;color:var(--muted);line-height:1.5}
+.fm-field{margin-bottom:1rem}
+.fm-field label{display:block;font-family:'Poppins',sans-serif;font-weight:600;font-size:.84rem;color:var(--ink);margin-bottom:0}
+.fm-req{color:#c0392b}
+.fm-opt{color:var(--muted);font-weight:500;font-size:.76rem}
+.fm-field input,.fm-field select{display:block;width:100%;margin-top:.45rem;padding:.74rem .9rem;border:1.5px solid var(--line);border-radius:10px;
+  font-family:inherit;font-size:.95rem;color:var(--ink);background:#fff;transition:border-color .2s,box-shadow .2s}
+.fm-field input:focus,.fm-field select:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(47,143,62,.15)}
+.fm-field.bad input,.fm-field.bad select{border-color:#e05b4b;box-shadow:0 0 0 3px rgba(224,91,75,.13)}
+.fm-err{color:#c0392b;font-size:.78rem;margin-top:.3rem}
+.fm-dob{display:none;margin-top:.5rem;background:var(--green-tint);color:var(--green-d);
+  font-family:'Poppins',sans-serif;font-weight:600;font-size:.86rem;padding:.5rem .8rem;border-radius:8px}
+.fm-submit{width:100%;justify-content:center;margin-top:.5rem}
+.fm-success{display:none;text-align:center;padding:1.8rem .5rem}
+.fm-success.show{display:block;animation:fm-pop .3s ease}
+@keyframes fm-pop{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:none}}
+.fm-success .sym{font-size:3.2rem;color:var(--green);font-variation-settings:'FILL' 1}
+.fm-success strong{display:block;font-family:'Poppins',sans-serif;font-size:1.35rem;color:var(--ink);margin:.4rem 0 .35rem}
+.fm-success p{color:var(--muted);font-size:.92rem;max-width:360px;margin:0 auto}
+@media (prefers-reduced-motion: reduce){ .fm-success.show{animation:none} }

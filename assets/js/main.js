@@ -290,4 +290,145 @@
       if (pm) pm.classList.remove("open");
     }
   });
+
+  /* ===================== Admission Enquiry & Campus Visit popup forms ===================== */
+  (function () {
+    var RECIPIENT = "green.ragul@gmail.com";
+    var WEB3FORMS_KEY = ""; /* <-- paste your Web3Forms access key here for automatic email; leave "" to use the visitor's email app (mailto) */
+
+    var MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    function fmtDate(v){ if(!v) return ""; var d=new Date(v+"T00:00:00"); if(isNaN(d)) return v; return (d.getDate()<10?"0":"")+d.getDate()+" "+MON[d.getMonth()]+" "+d.getFullYear(); }
+    function ageYM(v){ var d=new Date(v+"T00:00:00"), n=new Date(); var y=n.getFullYear()-d.getFullYear(), m=n.getMonth()-d.getMonth(); if(n.getDate()<d.getDate()) m--; if(m<0){ y--; m+=12; } return {y:y,m:m}; }
+    function validEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
+    var GRADES=["Kindergarten (LKG/UKG)","Primary (Grades 1-5)","Middle School (Grades 6-8)","High School (Grades 9-12)"];
+    var SLOTS=["Morning: 09:30 AM – 11:30 AM","Afternoon: 02:00 PM – 04:00 PM"];
+    function opts(arr,ph){ return '<option value="">'+ph+'</option>'+arr.map(function(o){return '<option>'+o+'</option>';}).join(''); }
+    var today=new Date().toISOString().slice(0,10);
+
+    function field(label, inner, req){
+      return '<div class="fm-field"><label>'+label+(req?' <span class="fm-req">*</span>':' <span class="fm-opt">(optional)</span>')+inner+'</label><div class="fm-err"></div></div>';
+    }
+
+    var admBody =
+      field("Student Full Name", '<input type="text" name="Student Name" data-req placeholder="Child’s full name">', true)+
+      field("Student Date of Birth", '<input type="date" name="_dob" id="admDob" data-req max="'+today+'"><div class="fm-dob" id="admDobOut"></div>', true)+
+      field("Grade / Standard Seeking", '<select name="Grade Seeking" data-req>'+opts(GRADES,"Select grade")+'</select>', true)+
+      field("Parent / Guardian Name", '<input type="text" name="Parent / Guardian" data-req placeholder="Your full name">', true)+
+      field("Contact Number", '<input type="tel" name="Contact Number" data-req placeholder="+91 XXXXX XXXXX">', true)+
+      field("Email Address", '<input type="email" name="Email" data-email placeholder="you@example.com">', false);
+
+    var campBody =
+      field("Parent / Guardian Name", '<input type="text" name="Parent / Guardian" data-req placeholder="Your full name">', true)+
+      field("Mobile Number", '<input type="tel" name="Mobile Number" data-req placeholder="10-digit number">', true)+
+      field("Preferred Visit Date", '<input type="date" name="_visit" id="campVisit" data-req min="'+today+'">', true)+
+      field("Preferred Time Window", '<select name="Preferred Time" data-req>'+opts(SLOTS,"Select slot")+'</select>', true)+
+      field("Email Address", '<input type="email" name="Email" data-email placeholder="you@example.com">', false);
+
+    function buildModal(id, title, sub, body, submitLabel){
+      var m=document.createElement("div");
+      m.className="form-modal"; m.id=id;
+      m.setAttribute("role","dialog"); m.setAttribute("aria-modal","true"); m.setAttribute("aria-labelledby",id+"-t");
+      m.innerHTML='<div class="fm-overlay"></div><div class="fm-dialog">'+
+        '<button type="button" class="fm-close" aria-label="Close form">'+sym("close")+'</button>'+
+        '<div class="fm-head"><h2 id="'+id+'-t">'+title+'</h2><p>'+sub+'</p></div>'+
+        '<form class="fm-form" novalidate>'+body+
+          '<button type="submit" class="btn btn-accent fm-submit">'+sym("send")+' '+submitLabel+'</button>'+
+        '</form>'+
+        '<div class="fm-success"><span class="sym">check_circle</span><strong>Thank you!</strong><p class="fm-success-msg"></p></div>'+
+      '</div>';
+      document.body.appendChild(m);
+      return m;
+    }
+
+    var admModal=buildModal("admissionModal","Admission Enquiry","Fill in the details and our admissions office will contact you within one working day.",admBody,"Submit Enquiry");
+    var campModal=buildModal("campusModal","Book a Campus Visit","Choose a date and time and we will confirm your guided campus tour.",campBody,"Schedule Visit");
+
+    var admDob=admModal.querySelector("#admDob"), admDobOut=admModal.querySelector("#admDobOut");
+    if(admDob){ admDob.addEventListener("change",function(){
+      if(admDob.value){ var a=ageYM(admDob.value); admDobOut.textContent=fmtDate(admDob.value)+", "+a.y+"Yr "+a.m+"M"; admDobOut.style.display="block"; }
+      else admDobOut.style.display="none";
+    }); }
+
+    function openModal(m, trigger){
+      var pm=document.querySelector(".promo-modal.open"); if(pm) pm.classList.remove("open");
+      m._opener=trigger||null;
+      m.classList.add("open"); document.body.style.overflow="hidden";
+      var f=m.querySelector("input,select"); if(f) setTimeout(function(){f.focus();},60);
+    }
+    function closeModal(m){
+      m.classList.remove("open"); document.body.style.overflow="";
+      var form=m.querySelector(".fm-form"); if(form){ form.reset(); form.style.display=""; }
+      m.querySelector(".fm-success").classList.remove("show");
+      if(admDobOut) admDobOut.style.display="none";
+      m.querySelectorAll(".fm-field").forEach(function(fl){ fl.classList.remove("bad"); var e=fl.querySelector(".fm-err"); if(e) e.textContent=""; });
+      if(m._opener && m._opener.focus) m._opener.focus();
+    }
+
+    [admModal,campModal].forEach(function(m){
+      m.querySelector(".fm-close").addEventListener("click",function(){ closeModal(m); });
+    });
+
+    function handle(m, subjectFn){
+      var form=m.querySelector(".fm-form");
+      form.addEventListener("submit",function(e){
+        e.preventDefault();
+        var ok=true, first=null;
+        form.querySelectorAll(".fm-field").forEach(function(fl){
+          var inp=fl.querySelector("[data-req],[data-email]"); if(!inp) return;
+          var msg="";
+          if(inp.hasAttribute("data-req") && !inp.value.trim()) msg="This field is required.";
+          else if(inp.hasAttribute("data-email") && inp.value.trim() && !validEmail(inp.value.trim())) msg="Enter a valid email address.";
+          fl.classList.toggle("bad",!!msg);
+          fl.querySelector(".fm-err").textContent=msg;
+          if(msg){ ok=false; if(!first) first=inp; }
+        });
+        if(!ok){ if(first) first.focus(); return; }
+
+        var data={};
+        form.querySelectorAll("input,select").forEach(function(inp){
+          var n=inp.getAttribute("name"); if(!n) return;
+          if(n==="_dob"){ if(inp.value){ var a=ageYM(inp.value); data["Date of Birth"]=fmtDate(inp.value); data["Age"]=a.y+" Yr "+a.m+" M"; } }
+          else if(n==="_visit"){ if(inp.value) data["Preferred Visit Date"]=fmtDate(inp.value); }
+          else if(inp.value.trim()) data[n]=inp.value.trim();
+        });
+        var subject=subjectFn(data), reply=data["Email"]||"";
+        send(subject,data,reply);
+
+        form.style.display="none";
+        var sc=m.querySelector(".fm-success"); sc.classList.add("show");
+        m.querySelector(".fm-success-msg").textContent="Your "+(m===campModal?"campus visit request":"admission enquiry")+" has been submitted. We will be in touch shortly.";
+        setTimeout(function(){ closeModal(m); }, 3500);
+      });
+    }
+    handle(admModal,function(d){ return "New Admission Enquiry — "+(d["Student Name"]||"Alagar Public School"); });
+    handle(campModal,function(d){ return "New Campus Visit Request — "+(d["Parent / Guardian"]||"Alagar Public School"); });
+
+    function send(subject,fields,reply){
+      if(WEB3FORMS_KEY){
+        var payload={access_key:WEB3FORMS_KEY,subject:subject,from_name:"Alagar Public School Website"};
+        Object.keys(fields).forEach(function(k){ payload[k]=fields[k]; });
+        if(reply) payload.replyto=reply;
+        fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(payload)}).catch(function(){ mailto(subject,fields); });
+      } else { mailto(subject,fields); }
+    }
+    function mailto(subject,fields){
+      var body="Alagar Public School — new form submission\n\n";
+      Object.keys(fields).forEach(function(k){ body+=k+": "+fields[k]+"\n"; });
+      body+="\nSubmitted: "+new Date().toLocaleString();
+      var a=document.createElement("a");
+      a.href="mailto:"+RECIPIENT+"?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body);
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    }
+
+    document.addEventListener("click",function(e){
+      var el=e.target.closest && e.target.closest("a,button"); if(!el) return;
+      if(el.closest(".form-modal")) return;
+      var txt=(el.textContent||"").replace(/\s+/g," ").trim();
+      if(/Book a Campus Visit/.test(txt)){ e.preventDefault(); openModal(campModal, el); return; }
+      var inNav=el.closest(".nav");
+      if((!inNav && el.matches('a[href="admission.html"]')) || /Apply Now|Apply for 20|Start Admission Enquiry/.test(txt)){ e.preventDefault(); openModal(admModal, el); return; }
+    });
+  })();
+
 })();

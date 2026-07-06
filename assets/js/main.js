@@ -114,8 +114,9 @@
       '<footer class="footer"><div class="wrap">' +
         '<div class="foot-news">' +
           '<div class="fn-head">' + sym("mail") + '<div><strong>Subscribe to Our Newsletter</strong><small>School news, events and updates — straight to your inbox.</small></div></div>' +
-          '<form class="fn-form" data-enquiry><input type="email" required placeholder="Enter your email address" aria-label="Your email address"><button class="btn btn-accent" type="submit">Subscribe</button></form>' +
-          '<div class="form-success">&#10003; Thank you! You are now subscribed to our newsletter.</div>' +
+          '<form class="fn-form" data-enquiry><input type="email" name="Email" required autocomplete="email" placeholder="Enter your email address" aria-label="Your email address"><button class="btn btn-accent" type="submit">Subscribe</button></form>' +
+          '<div class="form-success" role="status" aria-live="polite">&#10003; Thank you! You are now subscribed to our newsletter.</div>' +
+          '<div class="form-error" role="alert">Sorry, we could not subscribe you right now. Please try again.</div>' +
         "</div>" +
         '<div class="footer-top">' +
           '<div class="footer-brand">' +
@@ -309,9 +310,34 @@
   document.querySelectorAll("form[data-enquiry]").forEach(function (f) {
     f.addEventListener("submit", function (e) {
       e.preventDefault();
-      f.style.display = "none";
+      var email = f.querySelector('input[type="email"]');
+      var button = f.querySelector('button[type="submit"]');
       var ok = f.parentElement.querySelector(".form-success");
-      if (ok) ok.style.display = "block";
+      var error = f.parentElement.querySelector(".form-error");
+      if (error) error.style.display = "none";
+      button.disabled = true;
+      button.textContent = "Subscribing...";
+      fetch("https://formsubmit.co/ajax/" + encodeURIComponent("alagarschool@gmail.com"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: "Subscribe to our News & Events",
+          _template: "table",
+          _captcha: "false",
+          _replyto: email.value.trim(),
+          Email: email.value.trim(),
+          Source: "Alagar Public School Newsletter",
+          Submitted: new Date().toLocaleString()
+        })
+      }).then(function (response) {
+        if (!response.ok) throw new Error("Subscription failed");
+        f.style.display = "none";
+        if (ok) ok.style.display = "block";
+      }).catch(function () {
+        button.disabled = false;
+        button.textContent = "Subscribe";
+        if (error) error.style.display = "block";
+      });
     });
   });
 

@@ -134,7 +134,6 @@
             '<li><a href="about.html#disclosure">Mandatory Disclosure</a></li>' +
             '<li><a href="contact.html">Contact Us</a></li>' +
             '<li><a href="feedback.html">Parent Feedback</a></li>' +
-            '<li><a href="reviews.html">Reviews</a></li>' +
           "</ul></div>" +
           '<div class="footer-col"><h4>Explore</h4><ul>' +
             '<li><a href="academics.html">Academics</a></li>' +

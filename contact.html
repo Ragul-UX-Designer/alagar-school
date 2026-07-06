@@ -69,7 +69,7 @@
           <div class="fm-field"><label>Message <span class="fm-opt">(optional)</span><textarea name="Message" placeholder="How can we help you?"></textarea></label><div class="fm-err"></div></div>
           <button type="submit" class="btn btn-accent fm-submit" style="width:100%;justify-content:center"><span class="sym">send</span> Send Message</button>
         </form>
-        <div class="fm-success" id="contactSuccess" style="text-align:center;padding:1.4rem .5rem"><span class="sym" style="font-size:3rem;color:var(--green)">check_circle</span><strong style="display:block;font-family:'Poppins',sans-serif;font-size:1.3rem;color:var(--ink);margin:.4rem 0 .3rem">Thank you!</strong><p style="color:var(--muted)">Your message has been prepared in your email app. We'll be in touch shortly.</p></div>
+        <div class="fm-success" id="contactSuccess" style="text-align:center;padding:1.4rem .5rem"><span class="sym" style="font-size:3rem;color:var(--green)">check_circle</span><strong style="display:block;font-family:'Poppins',sans-serif;font-size:1.3rem;color:var(--ink);margin:.4rem 0 .3rem">Thank you!</strong><p style="color:var(--muted)">Your message has been submitted. We'll be in touch shortly.</p></div>
       </div>
       <div class="reveal">
         <iframe class="map-embed" title="Alagar Public School location map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7885.280827901225!2d78.121176!3d8.819811!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x7c2eb31e21bd940b!2sAlagar%20Public%20School!5e0!3m2!1sen!2sin!4v1635477670207!5m2!1sen!2sin" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
@@ -128,12 +128,21 @@
     });
     if(!ok){ if(first) first.focus(); return; }
     var d={}; f.querySelectorAll("input,textarea").forEach(function(i){ if(i.name&&i.value.trim()) d[i.name]=i.value.trim(); });
-    var body="Alagar Public School — website contact form\n\n";
-    Object.keys(d).forEach(function(k){ body+=k+": "+d[k]+"\n"; });
-    var a=document.createElement("a");
-    a.href="mailto:alagarschool@gmail.com?subject="+encodeURIComponent("Website Enquiry — "+(d.Name||"Contact"))+"&body="+encodeURIComponent(body);
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    f.style.display="none"; document.getElementById("contactSuccess").style.display="block";
+    var submit=f.querySelector(".fm-submit"); submit.disabled=true;
+    d._subject="Website Enquiry - "+(d.Name||"Contact");
+    d._template="table"; d._captcha="false";
+    d.Source="Alagar Public School Website"; d.Submitted=new Date().toLocaleString();
+    if(d.Email) d._replyto=d.Email;
+    fetch("https://formsubmit.co/ajax/"+encodeURIComponent("alagarschool@gmail.com"),{
+      method:"POST", headers:{"Content-Type":"application/json",Accept:"application/json"}, body:JSON.stringify(d)
+    }).then(function(response){
+      if(!response.ok) throw new Error("Form submission failed");
+      f.style.display="none"; document.getElementById("contactSuccess").style.display="block";
+    }).catch(function(){
+      submit.disabled=false;
+      var err=f.querySelector(".fm-err");
+      if(err) err.textContent="Sorry, we could not send your message. Please try again or call the school office.";
+    });
   });
 })();
 </script>

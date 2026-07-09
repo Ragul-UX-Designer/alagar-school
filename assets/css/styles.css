@@ -646,6 +646,8 @@ button.tb-item{background:none;border:none;cursor:default;padding:0}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,
 textarea:focus-visible,summary:focus-visible,[tabindex]:focus-visible{
   outline:3px solid #143d18;outline-offset:2px;box-shadow:0 0 0 5px rgba(255,255,255,.65);border-radius:5px}
+/* round close buttons: keep the focus ring circular, not a square */
+.vm-close:focus-visible,.promo-close:focus-visible{border-radius:50%}
 .fn-form input:focus-visible{outline:3px solid #ffd23c;box-shadow:0 0 0 4px rgba(0,0,0,.35)}
 
 /* 11. skip-to-content link */

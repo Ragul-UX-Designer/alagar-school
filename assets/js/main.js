@@ -375,13 +375,27 @@
   function openVideo(id) {
     if (!id) return;
     videoOpener = document.activeElement;
-    var ifr = document.createElement("iframe");
-    ifr.src = "https://www.youtube.com/embed/" + id + "?autoplay=1&rel=0&modestbranding=1&playsinline=1";
-    ifr.title = "Video";
-    ifr.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen");
-    ifr.setAttribute("allowfullscreen", "");
-    ifr.setAttribute("frameborder", "0");
-    vmFrame.innerHTML = ""; vmFrame.appendChild(ifr); vmodal.classList.add("open");
+    var el;
+    if (/\.(mp4|webm|ogg|mov)(\?|#|$)/i.test(id) || id.indexOf("/") !== -1) {
+      /* local / self-hosted video file */
+      el = document.createElement("video");
+      el.src = id;
+      el.controls = true;
+      el.autoplay = true;
+      el.playsInline = true;
+      el.setAttribute("playsinline", "");
+      el.style.width = "100%";
+      el.style.height = "100%";
+    } else {
+      /* YouTube video id */
+      el = document.createElement("iframe");
+      el.src = "https://www.youtube.com/embed/" + id + "?autoplay=1&rel=0&modestbranding=1&playsinline=1";
+      el.title = "Video";
+      el.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen");
+      el.setAttribute("allowfullscreen", "");
+      el.setAttribute("frameborder", "0");
+    }
+    vmFrame.innerHTML = ""; vmFrame.appendChild(el); vmodal.classList.add("open");
     vmodal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
     setTimeout(function () { focusFirst(vmodal, vmodal.querySelector(".vm-close")); }, 60);
@@ -670,34 +684,50 @@
 })();
 
 
-/* ===================== INTRO VIDEO (YouTube autoplay, muted) ===================== */
+/* ===================== INTRO VIDEO (self-hosted file or YouTube) ===================== */
 (function () {
   var box = document.querySelector(".intro-video");
   if (!box) return;
   var id = (box.getAttribute("data-yt") || "").trim();
-  if (!id || id === "YOUR_VIDEO_ID") return; // keep clean poster until a real ID is set
+  var src = (box.getAttribute("data-video") || "").trim();
+  var posterSrc = (box.getAttribute("data-poster") || "").trim();
+  if (!src && (!id || id === "YOUR_VIDEO_ID")) return; // keep clean poster until a real source is set
   var frame = box.querySelector(".iv-frame");
   if (!frame) return;
   var poster = box.querySelector(".iv-poster");
   if (poster) {
     var note = poster.querySelector(".iv-note");
     if (note) note.textContent = "Watch our Campus Tour";
-    poster.style.backgroundImage = "linear-gradient(rgba(9,32,20,.15),rgba(9,32,20,.45)), url('https://i.ytimg.com/vi/" + id + "/hqdefault.jpg')";
-    poster.style.backgroundSize = "cover";
-    poster.style.backgroundPosition = "center";
+    var bg = src ? posterSrc : "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg";
+    if (bg) {
+      poster.style.backgroundImage = "linear-gradient(rgba(9,32,20,.15),rgba(9,32,20,.45)), url('" + bg + "')";
+      poster.style.backgroundSize = "cover";
+      poster.style.backgroundPosition = "center";
+    }
   }
   function play() {
-    var ifr = document.createElement("iframe");
-    ifr.src = "https://www.youtube.com/embed/" + id + "?autoplay=1&rel=0&modestbranding=1&playsinline=1";
-    ifr.title = "Alagar Public School Campus Tour";
-    ifr.loading = "lazy";
-    ifr.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen");
-    ifr.setAttribute("allowfullscreen", "");
-    ifr.setAttribute("frameborder", "0");
-    ifr.style.width = "100%";
-    ifr.style.height = "100%";
+    var el;
+    if (src) {
+      el = document.createElement("video");
+      el.src = src;
+      el.controls = true;
+      el.autoplay = true;
+      el.playsInline = true;
+      el.setAttribute("playsinline", "");
+      if (posterSrc) el.poster = posterSrc;
+    } else {
+      el = document.createElement("iframe");
+      el.src = "https://www.youtube.com/embed/" + id + "?autoplay=1&rel=0&modestbranding=1&playsinline=1";
+      el.title = "Alagar Public School Campus Tour";
+      el.loading = "lazy";
+      el.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen");
+      el.setAttribute("allowfullscreen", "");
+      el.setAttribute("frameborder", "0");
+    }
+    el.style.width = "100%";
+    el.style.height = "100%";
     frame.innerHTML = "";
-    frame.appendChild(ifr);
+    frame.appendChild(el);
   }
   if (poster) poster.addEventListener("click", play);
   else play();

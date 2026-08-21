@@ -46,18 +46,13 @@
       ["Calendar", "news-events.html#calendar"],
       ["Circulars", "news-events.html#circulars"]
     ]},
-    { id: "careers", label: "Careers", href: "careers.html", items: [
-      ["Current Openings", "careers.html#openings"],
-      ["Why Join Us", "careers.html#why-join"],
-      ["Application Form", "careers.html#apply"]
-    ]},
     { id: "contact", label: "Contact Us", href: "contact.html" }
   ];
 
   function sym(n) { return '<span class="sym">' + n + "</span>"; }
 
   function buildHeader() {
-    var topnav = NAV.filter(function (n) { return n.id !== "contact"; }).map(function (n) {
+    var topnav = NAV.map(function (n) {
       var cur = n.id === CURRENT ? " current" : "";
       var carel = n.items ? '<span class="sym caret">expand_more</span>' : "";
       var sub = n.items ? '<ul class="dropdown">' + n.items.map(function (it) {
@@ -91,7 +86,7 @@
       "</div></div>" +
       '<header class="header" id="header"><div class="wrap">' +
         '<a href="index.html" class="brand" aria-label="Alagar Public School">' +
-          '<img src="assets/img/logo.png" alt="Alagar Public School" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'inline\'">' +
+          '<img src="assets/img/alagar-public-school-logo.png" alt="Alagar Public School" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'inline\'">' +
           '<span class="brand__fallback">Alagar Public School</span>' +
         "</a>" +
         '<nav aria-label="Primary" style="display:contents"><ul class="nav">' + topnav + "</ul></nav>" +
@@ -99,7 +94,7 @@
       "</div></header>" +
       '<div class="scrim" id="scrim"></div>' +
       '<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true">' +
-        '<div class="drawer__head"><img src="assets/img/logo.png" alt="Alagar"><button class="drawer__close" id="closeBtn" aria-label="Close">' + sym("close") + "</button></div>" +
+        '<div class="drawer__head"><img src="assets/img/alagar-public-school-logo.png" alt="Alagar"><button class="drawer__close" id="closeBtn" aria-label="Close">' + sym("close") + "</button></div>" +
         '<nav class="drawer__nav" aria-label="Mobile">' + drawer + "</nav>" +
         '<div class="drawer__cta">' +
           '<a href="admission.html" class="btn btn-accent" style="width:100%;justify-content:center">' + sym("edit_document") + "Apply Now</a>" +
@@ -120,7 +115,7 @@
         "</div>" +
         '<div class="footer-top">' +
           '<div class="footer-brand">' +
-            '<img src="assets/img/logo.png" alt="Alagar Public School">' +
+            '<img src="assets/img/alagar-public-school-logo.png" alt="Alagar Public School">' +
             "<p>The best CBSE school in Thoothukudi — joyful, holistic and future-ready learning from Montessori to Grade 12. Promoted &amp; managed by the Alagar Charitable Foundation since 2009.</p>" +
             '<div class="footer-soc">' +
               '<a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.6c-.8-.1-1.6-.15-2.4-.15-2.4 0-4 1.45-4 4.1v2.35H7.5V13h2.8v8z"/></svg></a>' +
@@ -141,7 +136,7 @@
             '<li><a href="admission.html">Admissions</a></li>' +
             '<li><a href="student-life.html">Student Life</a></li>' +
             '<li><a href="news-events.html">News &amp; Events</a></li>' +
-            '<li><a href="careers.html">Careers</a></li>' +
+            '<li><a href="news-events.html#circulars">Circulars</a></li>' +
           "</ul></div>" +
           '<div class="footer-col"><h4>Get In Touch</h4><ul class="footer-contact">' +
             "<li>" + sym("location_on") + "<span>4/42/3 Muthammal Colony Extension, Sankaraperi, Thoothukudi – 628002, Tamil Nadu.</span></li>" +
@@ -173,7 +168,7 @@
         "alternateName": "APS Thoothukudi",
         "description": "Best CBSE school in Thoothukudi (Tuticorin) — joyful, holistic, future-ready learning from Montessori to Grade 12.",
         "url": location.origin + "/",
-        "logo": location.origin + "/assets/img/logo.png",
+        "logo": location.origin + "/assets/img/alagar-public-school-logo.png",
         "telephone": "+91-461-2347300",
         "email": "alagarschool@gmail.com",
         "foundingDate": "2009",
@@ -316,15 +311,13 @@
       var error = f.parentElement.querySelector(".form-error");
       if (error) error.style.display = "none";
       button.disabled = true;
-      button.textContent = "Subscribing...";
-      fetch("https://formsubmit.co/ajax/" + encodeURIComponent("alagarschool@gmail.com"), {
+      button.classList.add("is-sending");
+      button.innerHTML = '<span class="btn-spin"></span> Subscribing…';
+      fetch("form-handler.php", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          _subject: "Subscribe to our News & Events",
-          _template: "table",
-          _captcha: "false",
-          _replyto: email.value.trim(),
+          formType: "newsletter",
           Email: email.value.trim(),
           Source: "Alagar Public School Newsletter",
           Submitted: new Date().toLocaleString()
@@ -335,6 +328,7 @@
         if (ok) ok.style.display = "block";
       }).catch(function () {
         button.disabled = false;
+        button.classList.remove("is-sending");
         button.textContent = "Subscribe";
         if (error) error.style.display = "block";
       });
@@ -525,8 +519,7 @@
 
   /* ===================== Admission Enquiry & Campus Visit popup forms ===================== */
   (function () {
-    var RECIPIENT = "alagarschool@gmail.com";
-    var FORM_ENDPOINT = "https://formsubmit.co/ajax/" + encodeURIComponent(RECIPIENT);
+    var FORM_ENDPOINT = "form-handler.php";
 
     var MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
     function fmtDate(v){ if(!v) return ""; var d=new Date(v+"T00:00:00"); if(isNaN(d)) return v; return (d.getDate()<10?"0":"")+d.getDate()+" "+MON[d.getMonth()]+" "+d.getFullYear(); }
@@ -610,7 +603,7 @@
       });
     });
 
-    function handle(m, subjectFn){
+    function handle(m, formType, subjectFn){
       var form=m.querySelector(".fm-form");
       form.addEventListener("submit",function(e){
         e.preventDefault();
@@ -634,28 +627,28 @@
           else if(inp.value.trim()) data[n]=inp.value.trim();
         });
         var subject=subjectFn(data), reply=data["Email"]||"";
-        var submitBtn=form.querySelector(".fm-submit");
-        if(submitBtn) submitBtn.disabled=true;
-        send(subject,data,reply).then(function(){
+        var submitBtn=form.querySelector(".fm-submit"), btnLabel=submitBtn?submitBtn.innerHTML:"";
+        function btnReset(){ if(submitBtn){ submitBtn.disabled=false; submitBtn.classList.remove("is-sending"); submitBtn.innerHTML=btnLabel; } }
+        if(submitBtn){ submitBtn.disabled=true; submitBtn.classList.add("is-sending"); submitBtn.innerHTML='<span class="btn-spin"></span> Sending…'; }
+        send(subject,data,reply,formType).then(function(){
           form.style.display="none";
           var sc=m.querySelector(".fm-success"); sc.classList.add("show");
           m.querySelector(".fm-success-msg").textContent="Your "+(m===campModal?"campus visit request":"admission enquiry")+" has been submitted. We will be in touch shortly.";
-          setTimeout(function(){ closeModal(m); if(submitBtn) submitBtn.disabled=false; }, 3500);
+          setTimeout(function(){ closeModal(m); btnReset(); }, 3500);
         }).catch(function(){
-          if(submitBtn) submitBtn.disabled=false;
+          btnReset();
           var err=form.querySelector(".fm-err");
           if(err) err.textContent="Sorry, we could not submit this right now. Please try again or call the school office.";
         });
       });
     }
-    handle(admModal,function(d){ return "New Admission Enquiry — "+(d["Student Name"]||"Alagar Public School"); });
-    handle(campModal,function(d){ return "New Campus Visit Request — "+(d["Parent / Guardian"]||"Alagar Public School"); });
+    handle(admModal,"admission",function(d){ return "New Admission Enquiry — "+(d["Student Name"]||"Alagar Public School"); });
+    handle(campModal,"campus",function(d){ return "New Campus Visit Request — "+(d["Parent / Guardian"]||"Alagar Public School"); });
 
-    function send(subject,fields,reply){
+    function send(subject,fields,reply,formType){
       var payload={
+        formType:formType,
         _subject:subject,
-        _template:"table",
-        _captcha:"false",
         Source:"Alagar Public School Website",
         Submitted:new Date().toLocaleString()
       };

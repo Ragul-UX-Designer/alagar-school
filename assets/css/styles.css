@@ -33,7 +33,12 @@
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:120px}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:120px;scrollbar-color:var(--green) var(--bg-soft);scrollbar-width:thin}
+/* branded scrollbar (WebKit: Chrome/Edge/Safari) */
+::-webkit-scrollbar{width:12px;height:12px}
+::-webkit-scrollbar-track{background:var(--bg-soft)}
+::-webkit-scrollbar-thumb{background:var(--green);border-radius:var(--r-pill);border:3px solid var(--bg-soft)}
+::-webkit-scrollbar-thumb:hover{background:var(--green-d)}
 body{font-family:'Inter',system-ui,sans-serif;color:var(--body);background:var(--bg);line-height:1.7;
   font-size:16px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
@@ -106,7 +111,7 @@ button.tb-item{background:none;border:none;cursor:default;padding:0}
 .header.scrolled{box-shadow:var(--sh1)}
 .header .wrap{display:flex;align-items:center;justify-content:space-between;gap:.75rem;height:84px}
 .brand{display:flex;align-items:center;flex-shrink:0}
-.brand img{height:56px;width:auto}
+.brand img{height:50px;width:auto}
 .brand__fallback{display:none;font-family:'Poppins',sans-serif;font-weight:800;font-size:1.2rem;color:var(--green-d)}
 .nav{display:flex;align-items:center;justify-content:flex-end;gap:.15rem;flex:1 1 auto;min-width:0}
 .nav>li{position:relative}
@@ -371,7 +376,7 @@ button.tb-item{background:none;border:none;cursor:default;padding:0}
 .cm-quote-card p{position:relative;z-index:1;color:var(--body);line-height:1.8;margin-bottom:1.4rem}
 .cm-quote-card .cm-by{position:relative;z-index:1}
 .vm-list{position:relative;margin-bottom:1.7rem}
-.vm-item{display:flex;gap:1.2rem;position:relative;padding-bottom:1.9rem}
+.vm-item{display:flex;gap:1.2rem;position:relative;padding-bottom:3rem}
 .vm-item:last-child{padding-bottom:0}
 .vm-item::after{content:"";position:absolute;left:27px;top:62px;bottom:2px;width:2px;background:rgba(47,143,62,.22)}
 .vm-item:last-child::after{display:none}
@@ -814,6 +819,20 @@ html:not(.fonts-ready) .awards-sec::after{color:transparent!important}
 .info-grid .info .sym{color:var(--green);font-size:1.5rem;flex-shrink:0}
 .info-grid .info small{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-family:'Poppins',sans-serif;font-weight:600}
 .info-grid .info strong{display:block;font-family:'Poppins',sans-serif;font-size:.98rem;color:var(--ink);margin-top:.18rem;line-height:1.35}
+/* transport banner (bus photo) */
+.transport-banner{position:relative;margin:1.8rem 0 0;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh2);aspect-ratio:21/9;background:var(--green-tint)}
+.transport-banner img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+.transport-banner:hover img{transform:scale(1.04)}
+.transport-banner figcaption{position:absolute;left:0;right:0;bottom:0;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;padding:2.6rem 1.2rem 1.1rem;
+  background:linear-gradient(to top,rgba(6,32,20,.88) 0%,rgba(6,32,20,.6) 60%,rgba(6,32,20,0) 100%);box-sizing:border-box}
+.transport-banner .tb-chip{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.16);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  color:#fff;font-family:'Poppins',sans-serif;font-weight:600;font-size:.8rem;line-height:1.2;padding:.4rem .8rem;border-radius:999px;border:1px solid rgba(255,255,255,.25);
+  white-space:nowrap;flex-shrink:0;box-sizing:border-box}
+.transport-banner .tb-chip .sym{font-size:1.05rem;line-height:1;display:inline-flex;align-items:center;justify-content:center}
+@media(max-width:680px){
+  .transport-banner{aspect-ratio:16/10}
+  .transport-banner figcaption{display:none}
+}
 .doc-list{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:1.5rem}
 .doc-list .doc{display:flex;align-items:center;gap:.6rem;background:var(--green-tint);color:var(--green-d);border-radius:var(--r-s);padding:.72rem .9rem;font-size:.86rem;font-weight:500;font-family:'Inter',sans-serif;cursor:pointer;transition:var(--tr);border:1px solid transparent}
 .doc-list .doc .sym{font-size:1.2rem;color:var(--green);flex-shrink:0}
@@ -938,6 +957,11 @@ html:not(.fonts-ready) .awards-sec::after{color:transparent!important}
 .hm-list .hm-role{font-family:'Poppins',sans-serif;font-weight:600;color:var(--green-d);font-size:.86rem}
 .hm-list .hm-person{text-align:right;font-size:.9rem;color:var(--muted)}
 .hm-list .hm-person b{display:block;color:var(--ink);font-weight:600}
+/* submit spinner + sending state (used by all forms) */
+@keyframes aps-spin{to{transform:rotate(360deg)}}
+.btn-spin{display:inline-block;width:1.05em;height:1.05em;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:aps-spin .7s linear infinite;vertical-align:-3px;margin-right:.15rem}
+.btn.is-sending{opacity:.8;pointer-events:none;cursor:progress}
+.btn:disabled{opacity:.8;cursor:not-allowed}
 
 /* academics — NEET band info cards */
 .edu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:.6rem}
@@ -1070,6 +1094,11 @@ a.gitem{text-decoration:none;color:inherit}
 .circ .circ-body strong{display:block;font-family:'Poppins',sans-serif;font-size:.98rem;color:var(--ink)}
 .circ .circ-body small{color:var(--muted);font-size:.82rem}
 .circ .circ-go{color:var(--green);font-size:1.4rem;flex-shrink:0}
+/* empty state — shown when there are no circulars */
+.circ-empty{display:flex;flex-direction:column;align-items:center;gap:.4rem;text-align:center;background:var(--green-tint);border:1px dashed var(--line);border-radius:var(--r-s);padding:2.4rem 1.4rem;max-width:900px;margin:0 auto}
+.circ-empty .sym{font-size:2.4rem;color:var(--green);opacity:.75}
+.circ-empty strong{font-family:'Poppins',sans-serif;color:var(--ink);font-size:1.1rem}
+.circ-empty p{color:var(--muted);font-size:.92rem;margin:0;max-width:46ch;line-height:1.6}
 
 /* newsletter band */
 .news-signup{background:linear-gradient(120deg,var(--green-dd),var(--green-d));border-radius:var(--r);padding:2.4rem;color:#fff;text-align:center;max-width:760px;margin:0 auto;position:relative;overflow:hidden}

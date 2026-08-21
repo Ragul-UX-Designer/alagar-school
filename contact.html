@@ -7,6 +7,21 @@
 <meta name="description" content="Contact Alagar Public School, Thoothukudi (Tuticorin) — address, phone, email and location map. We'd love to hear from you.">
 <meta name="keywords" content="Alagar Public School contact, address, phone, email, Thoothukudi CBSE school contact, Tuticorin">
 <link rel="icon" href="assets/img/favicon.png">
+<link rel="canonical" href="https://www.alagarschool.in/contact.html">
+<!-- Open Graph / social share -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Alagar Public School">
+<meta property="og:title" content="Contact Us — Alagar Public School, Thoothukudi (Tuticorin)">
+<meta property="og:description" content="Contact Alagar Public School, Thoothukudi (Tuticorin) — address, phone, email and location map. We'd love to hear from you.">
+<meta property="og:url" content="https://www.alagarschool.in/contact.html">
+<meta property="og:image" content="https://www.alagarschool.in/assets/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contact Us — Alagar Public School, Thoothukudi (Tuticorin)">
+<meta name="twitter:description" content="Contact Alagar Public School, Thoothukudi (Tuticorin) — address, phone, email and location map. We'd love to hear from you.">
+<meta name="twitter:image" content="https://www.alagarschool.in/assets/img/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -54,7 +69,7 @@
         <div class="cc-ico"><span class="sym">mail</span></div>
         <h3>Email Us</h3>
         <a href="mailto:alagarschool@gmail.com">alagarschool@gmail.com</a>
-        <p style="margin-top:.3rem">Mon – Sat, 9:00 am – 4:30 pm</p>
+        <p><em>A wonderful serenity has taken possession of my entire soul, like these.</em></p>
       </div>
     </div>
 
@@ -69,7 +84,6 @@
           <div class="fm-field"><label>Message <span class="fm-opt">(optional)</span><textarea name="Message" placeholder="How can we help you?"></textarea></label><div class="fm-err"></div></div>
           <button type="submit" class="btn btn-accent fm-submit" style="width:100%;justify-content:center"><span class="sym">send</span> Send Message</button>
         </form>
-        <div class="fm-success" id="contactSuccess" style="text-align:center;padding:1.4rem .5rem"><span class="sym" style="font-size:3rem;color:var(--green)">check_circle</span><strong style="display:block;font-family:'Poppins',sans-serif;font-size:1.3rem;color:var(--ink);margin:.4rem 0 .3rem">Thank you!</strong><p style="color:var(--muted)">Your message has been submitted. We'll be in touch shortly.</p></div>
       </div>
       <div class="reveal">
         <iframe class="map-embed" title="Alagar Public School location map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7885.280827901225!2d78.121176!3d8.819811!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x7c2eb31e21bd940b!2sAlagar%20Public%20School!5e0!3m2!1sen!2sin!4v1635477670207!5m2!1sen!2sin" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
@@ -110,12 +124,33 @@
 </section>
 
 </main>
+
+<!-- Contact success popup -->
+<div class="hmodal" id="contactThanks" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Message sent">
+  <div class="hm-overlay"></div>
+  <div class="hm-card" style="width:min(420px,100%)">
+    <div class="fm-success show" style="padding:2.4rem 1.6rem 2rem">
+      <span class="sym">check_circle</span>
+      <strong>Thank you!</strong>
+      <p>Your message has been submitted. We'll be in touch shortly.</p>
+      <button type="button" class="btn btn-green" data-close style="margin-top:1.4rem"><span class="sym">check</span> Done</button>
+    </div>
+  </div>
+</div>
+
 <div id="site-footer"></div>
 <script src="assets/js/main.js"></script>
 <script src="assets/js/threed.js"></script>
 <script>
 (function(){
   var f=document.getElementById("contactForm"); if(!f) return;
+  var thanks=document.getElementById("contactThanks");
+  function openThanks(){ if(!thanks) return; thanks.classList.add("open"); thanks.setAttribute("aria-hidden","false"); document.body.style.overflow="hidden"; }
+  function closeThanks(){ if(!thanks) return; thanks.classList.remove("open"); thanks.setAttribute("aria-hidden","true"); document.body.style.overflow=""; }
+  if(thanks){
+    thanks.addEventListener("click",function(e){ if(e.target.classList.contains("hm-overlay")||e.target.closest("[data-close]")) closeThanks(); });
+    document.addEventListener("keydown",function(e){ if(e.key==="Escape"&&thanks.classList.contains("open")) closeThanks(); });
+  }
   function validEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
   f.addEventListener("submit",function(e){
     e.preventDefault(); var ok=true, first=null;
@@ -128,18 +163,18 @@
     });
     if(!ok){ if(first) first.focus(); return; }
     var d={}; f.querySelectorAll("input,textarea").forEach(function(i){ if(i.name&&i.value.trim()) d[i.name]=i.value.trim(); });
-    var submit=f.querySelector(".fm-submit"); submit.disabled=true;
-    d._subject="Website Enquiry - "+(d.Name||"Contact");
-    d._template="table"; d._captcha="false";
+    var submit=f.querySelector(".fm-submit"), label=submit.innerHTML;
+    submit.disabled=true; submit.classList.add("is-sending"); submit.innerHTML='<span class="btn-spin"></span> Sending…';
+    d.formType="contact";
     d.Source="Alagar Public School Website"; d.Submitted=new Date().toLocaleString();
-    if(d.Email) d._replyto=d.Email;
-    fetch("https://formsubmit.co/ajax/"+encodeURIComponent("alagarschool@gmail.com"),{
+    function restore(){ submit.disabled=false; submit.classList.remove("is-sending"); submit.innerHTML=label; }
+    fetch("form-handler.php",{
       method:"POST", headers:{"Content-Type":"application/json",Accept:"application/json"}, body:JSON.stringify(d)
     }).then(function(response){
       if(!response.ok) throw new Error("Form submission failed");
-      f.style.display="none"; document.getElementById("contactSuccess").style.display="block";
+      f.reset(); restore(); openThanks();
     }).catch(function(){
-      submit.disabled=false;
+      restore();
       var err=f.querySelector(".fm-err");
       if(err) err.textContent="Sorry, we could not send your message. Please try again or call the school office.";
     });

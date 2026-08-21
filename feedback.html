@@ -7,6 +7,21 @@
 <meta name="description" content="Share your feedback with Alagar Public School, Thoothukudi (Tuticorin). Your suggestions help us keep improving the experience for every child and family.">
 <meta name="keywords" content="Alagar Public School feedback, parent feedback, suggestions, review, Thoothukudi CBSE school, Tuticorin">
 <link rel="icon" href="assets/img/favicon.png">
+<link rel="canonical" href="https://www.alagarschool.in/feedback.html">
+<!-- Open Graph / social share -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Alagar Public School">
+<meta property="og:title" content="Parent Feedback — Alagar Public School, Thoothukudi (Tuticorin)">
+<meta property="og:description" content="Share your feedback with Alagar Public School, Thoothukudi (Tuticorin). Your suggestions help us keep improving the experience for every child and family.">
+<meta property="og:url" content="https://www.alagarschool.in/feedback.html">
+<meta property="og:image" content="https://www.alagarschool.in/assets/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Parent Feedback — Alagar Public School, Thoothukudi (Tuticorin)">
+<meta name="twitter:description" content="Share your feedback with Alagar Public School, Thoothukudi (Tuticorin). Your suggestions help us keep improving the experience for every child and family.">
+<meta name="twitter:image" content="https://www.alagarschool.in/assets/img/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -101,8 +116,6 @@
 
           <button type="submit" class="btn btn-accent fm-submit" style="width:100%;justify-content:center"><span class="sym">send</span> Submit Feedback</button>
         </form>
-
-        <div class="fm-success" id="feedbackSuccess" style="text-align:center;padding:1.6rem .5rem"><span class="sym" style="font-size:3rem;color:var(--green)">check_circle</span><strong style="display:block;font-family:'Poppins',sans-serif;font-size:1.3rem;color:var(--ink);margin:.4rem 0 .3rem">Thank you for your feedback!</strong><p style="color:var(--muted)">Your response has been submitted successfully. We truly value your time and thoughts.</p></div>
       </div>
 
       <!-- Aside -->
@@ -142,12 +155,33 @@
 </section>
 
 </main>
+
+<!-- Feedback success popup -->
+<div class="hmodal" id="feedbackThanks" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Feedback submitted">
+  <div class="hm-overlay"></div>
+  <div class="hm-card" style="width:min(420px,100%)">
+    <div class="fm-success show" style="padding:2.4rem 1.6rem 2rem">
+      <span class="sym">check_circle</span>
+      <strong>Thank you for your feedback!</strong>
+      <p>Your response has been submitted successfully. We truly value your time and thoughts.</p>
+      <button type="button" class="btn btn-green" data-close style="margin-top:1.4rem"><span class="sym">check</span> Done</button>
+    </div>
+  </div>
+</div>
+
 <div id="site-footer"></div>
 <script src="assets/js/main.js"></script>
 <script src="assets/js/threed.js"></script>
 <script>
 (function(){
   var f=document.getElementById("feedbackForm"); if(!f) return;
+  var thanks=document.getElementById("feedbackThanks");
+  function openThanks(){ if(!thanks) return; thanks.classList.add("open"); thanks.setAttribute("aria-hidden","false"); document.body.style.overflow="hidden"; }
+  function closeThanks(){ if(!thanks) return; thanks.classList.remove("open"); thanks.setAttribute("aria-hidden","true"); document.body.style.overflow=""; }
+  if(thanks){
+    thanks.addEventListener("click",function(e){ if(e.target.classList.contains("hm-overlay")||e.target.closest("[data-close]")) closeThanks(); });
+    document.addEventListener("keydown",function(e){ if(e.key==="Escape"&&thanks.classList.contains("open")) closeThanks(); });
+  }
   // ----- star rating -----
   var stars=Array.prototype.slice.call(document.querySelectorAll("#fbRating .rstar"));
   var rin=document.getElementById("ratingValue");
@@ -182,18 +216,19 @@
 
     var d={}; f.querySelectorAll("input,textarea,select").forEach(function(i){ if(i.type==="checkbox"){ if(i.checked) d[i.name]=i.value; } else if(i.name && i.value.trim()) d[i.name]=i.value.trim(); });
     if(d.Rating) d.Rating=d.Rating+" / 5";
-    var submit=f.querySelector(".fm-submit"); submit.disabled=true;
-    d._subject="Parent Feedback - "+(d["Parent Name"]||"Anonymous")+(d.Rating?(" ("+d.Rating+")"):"");
-    d._template="table"; d._captcha="false";
+    var submit=f.querySelector(".fm-submit"), label=submit.innerHTML;
+    submit.disabled=true; submit.classList.add("is-sending"); submit.innerHTML='<span class="btn-spin"></span> Sending…';
+    d.formType="feedback";
     d.Source="Alagar Public School Website"; d.Submitted=new Date().toLocaleString();
-    if(d.Email) d._replyto=d.Email;
-    fetch("https://formsubmit.co/ajax/"+encodeURIComponent("alagarschool@gmail.com"),{
+    fetch("form-handler.php",{
       method:"POST", headers:{"Content-Type":"application/json",Accept:"application/json"}, body:JSON.stringify(d)
     }).then(function(response){
       if(!response.ok) throw new Error("Form submission failed");
-      f.style.display="none"; document.getElementById("feedbackSuccess").style.display="block";
+      f.reset(); paint(0); setNote(0);
+      submit.disabled=false; submit.classList.remove("is-sending"); submit.innerHTML=label;
+      openThanks();
     }).catch(function(){
-      submit.disabled=false;
+      submit.disabled=false; submit.classList.remove("is-sending"); submit.innerHTML=label;
       var err=f.querySelector(".fm-err");
       if(err) err.textContent="Sorry, we could not submit your feedback. Please try again or call the school office.";
     });

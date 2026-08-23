@@ -139,7 +139,7 @@
             '<li><a href="news-events.html#circulars">Circulars</a></li>' +
           "</ul></div>" +
           '<div class="footer-col"><h4>Get In Touch</h4><ul class="footer-contact">' +
-            "<li>" + sym("location_on") + "<span>4/42/3 Muthammal Colony Extension, Sankaraperi, Thoothukudi – 628002, Tamil Nadu.</span></li>" +
+            "<li>" + sym("location_on") + "<span>4/42/3 Muthammal Colony Extension, Thoothukudi (Tuticorin) – 628002, Tamil Nadu.</span></li>" +
             "<li>" + sym("call") + "<span>0461 2347300 · +91 88700 01209</span></li>" +
             "<li>" + sym("mail") + "<span>alagarschool@gmail.com</span></li>" +
           "</ul></div>" +
@@ -174,7 +174,7 @@
         "foundingDate": "2009",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "4/42/3 Muthammal Colony Extension, Sankaraperi",
+          "streetAddress": "4/42/3 Muthammal Colony Extension",
           "addressLocality": "Thoothukudi (Tuticorin)",
           "addressRegion": "Tamil Nadu",
           "postalCode": "628002",

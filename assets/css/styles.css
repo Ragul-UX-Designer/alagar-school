@@ -995,6 +995,38 @@ html:not(.fonts-ready) .awards-sec::after{color:transparent!important}
 @media(max-width:880px){.steps.cols-3{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.steps.cols-3{grid-template-columns:1fr}}
 
+/* admission — Age-eligibility cards (Kindergarten): age-ring design */
+.age-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.15rem;margin-top:1.9rem}
+@media(max-width:820px){.age-cards{grid-template-columns:1fr;max-width:400px}}
+
+.age-card{--c:var(--green);--cd:var(--green-d);--ct:var(--green-tint);
+  position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--r);
+  padding:1.7rem 1.3rem 1.5rem;text-align:center;overflow:hidden;transition:var(--tr)}
+.age-card.alt{--c:var(--accent);--cd:var(--accent-d);--ct:var(--accent-tint)}
+.age-card::before{content:"";position:absolute;top:0;left:0;right:0;height:6px;
+  background:linear-gradient(90deg,var(--c),var(--cd))}
+/* faint child-friendly watermark icon in the corner */
+.age-card .age-wm{position:absolute;right:-14px;bottom:-14px;font-size:6.5rem;line-height:1;
+  color:var(--ct);opacity:.65;pointer-events:none;z-index:0}
+.age-card:hover{transform:translateY(-6px);box-shadow:var(--sh2);border-color:transparent}
+.age-card>*{position:relative;z-index:1}
+
+.age-stage{display:inline-block;font-family:'Poppins',sans-serif;font-weight:700;font-size:.72rem;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--cd);background:var(--ct);
+  padding:.34rem .85rem;border-radius:var(--r-pill);margin-bottom:1.15rem}
+
+.age-ring{width:120px;height:120px;margin:0 auto .95rem;border-radius:50%;display:grid;place-items:center;
+  background:conic-gradient(var(--c) var(--deg,240deg),var(--ct) 0)}
+.age-ring::after{content:"";grid-area:1/1;width:calc(100% - 18px);height:calc(100% - 18px);
+  border-radius:50%;background:#fff;box-shadow:inset 0 1px 3px rgba(20,40,25,.06)}
+.age-ring .age-in{grid-area:1/1;z-index:1;display:flex;flex-direction:column;align-items:center;line-height:1}
+.age-ring .age-num{font-family:'Poppins',sans-serif;font-weight:800;font-size:2.7rem;color:var(--ink)}
+.age-ring .age-unit{font-family:'Poppins',sans-serif;font-weight:600;font-size:.7rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--cd);margin-top:.15rem}
+
+.age-card .age-cap{font-size:.85rem;color:var(--muted);line-height:1.5;margin:0}
+.age-card .age-cap b{color:var(--ink);font-weight:600}
+
 /* admission — clickable info card (e.g. TC sample → lightbox) */
 .info.info-clickable{cursor:pointer;font:inherit;width:100%;text-align:left}
 .info.info-clickable:hover{box-shadow:var(--sh1);border-color:var(--green);transform:translateY(-2px)}

@@ -366,22 +366,39 @@ Creativity Meets, Learning Problem Solvers in Action.</p></div></a>
       <h2 class="title">Recent Activities</h2>
       <p class="lead">Celebrating the vibrant life inside and beyond our classrooms.</p>
     </div>
+    <!--
+      RECENT ACTIVITIES — SELECTION RULES (keep this section curated by hand)
+      1. Show EXACTLY 4 cards. The grid is a fixed 4-column layout (.g-4); any
+         other count leaves an orphan card on desktop.
+      2. Order NEWEST FIRST — lead with the most recent academic year, oldest last.
+      3. Keep a BALANCED MIX: at least one school event, one Kindergarten
+         (Buds & Blooms) highlight, and one Achievement.
+      4. LINK each card to its relevant target:
+           - event album  ->  student-life.html#gm-<albumKey>   (e.g. #gm-ac2627, #gm-bb2627)
+           - achievement  ->  student-life.html#achievement
+         Album keys: ac=Academic, bb=Buds & Blooms, + last two digits of each year (2026-27 -> 2627).
+      5. Use the album's representative first image; keep the <h4> title short and
+         include the year. Always set width/height to the real image dimensions.
+      6. WHEN NEW PHOTOS ARE ADDED: run `node tools/build-gallery.mjs` (rebuilds the
+         student-life gallery/achievement pages), then refresh these 4 cards to the
+         newest items per rules 1-5.
+    -->
     <div class="cards-grid g-4">
       <div class="act-card reveal">
-        <div class="act-img"><img src="assets/img/Gallery/Academic2025-26/Annual-Day/AnnualDay1.jpg" alt="Annual Day Ceremony" loading="lazy" decoding="async" width="1200" height="612"><button class="act-play" type="button" data-yt-video="assets/video/campus-tour.mp4" aria-label="Watch video"><span class="sym">play_arrow</span></button></div>
-        <div class="act-body"><h4>Annual Day Ceremony 2025</h4><div class="act-links"><a class="a-more" href="student-life.html#activities">Read More <span class="sym">arrow_forward</span></a><button class="a-vid" type="button" data-yt-video="assets/video/campus-tour.mp4"><span class="sym">play_circle</span> Watch Video</button></div></div>
+        <div class="act-img"><img src="assets/img/Gallery/Academic2026-27/Independence-Day-Celebration/1.jpg" alt="Independence Day Celebration 2026" loading="lazy" decoding="async" width="1080" height="1350"></div>
+        <div class="act-body"><h4>Independence Day 2026</h4><div class="act-links"><a class="a-more" href="student-life.html#gm-ac2627">Read More <span class="sym">arrow_forward</span></a></div></div>
       </div>
       <div class="act-card reveal">
-        <div class="act-img"><img src="assets/img/Gallery/Academic2024-25/Annual-Sports-Day/Annual-Sports-Day1.jpg" alt="Sports Day" loading="lazy" decoding="async" width="1000" height="562"></div>
-        <div class="act-body"><h4>Sports Day 2025</h4><div class="act-links"><a class="a-more" href="student-life.html#activities">Read More <span class="sym">arrow_forward</span></a></div></div>
+        <div class="act-img"><img src="assets/img/Gallery/Buds-Blooms2026-27/Yellow-Day-Celebration/1.jpeg" alt="Buds &amp; Blooms Kindergarten" loading="lazy" decoding="async" width="1131" height="1600"></div>
+        <div class="act-body"><h4>Buds &amp; Blooms 2026-27</h4><div class="act-links"><a class="a-more" href="student-life.html#gm-bb2627">Read More <span class="sym">arrow_forward</span></a></div></div>
       </div>
       <div class="act-card reveal">
-        <div class="act-img"><img src="assets/img/Gallery/Academic2025-26/Pongal/Pongal1.jpg" alt="Cultural Day" loading="lazy" decoding="async" width="641" height="360"></div>
-        <div class="act-body"><h4>Cultural Day Celebrations</h4><div class="act-links"><a class="a-more" href="student-life.html#activities">Read More <span class="sym">arrow_forward</span></a></div></div>
+        <div class="act-img"><img src="assets/img/Achievement/2026-27/2.jpg" alt="Overall Champions 2026" loading="lazy" decoding="async" width="1080" height="1350"></div>
+        <div class="act-body"><h4>Champions &amp; Achievers 2026</h4><div class="act-links"><a class="a-more" href="student-life.html#achievement">Read More <span class="sym">arrow_forward</span></a></div></div>
       </div>
       <div class="act-card reveal">
-        <div class="act-img"><img src="assets/img/Gallery/Academic2025-26/ECA/ECA1.jpg" alt="A Day at Alagar" loading="lazy" decoding="async" width="1024" height="616"><button class="act-play" type="button" data-yt-video="assets/video/campus-tour.mp4" aria-label="Watch video"><span class="sym">play_arrow</span></button></div>
-        <div class="act-body"><h4>A Day at Alagar — Campus Film</h4><div class="act-links"><button class="a-vid" type="button" data-yt-video="assets/video/campus-tour.mp4"><span class="sym">play_circle</span> Watch Video</button></div></div>
+        <div class="act-img"><img src="assets/img/Gallery/Academic2025-26/Annual-Day/AnnualDay1.jpg" alt="Annual Day Ceremony" loading="lazy" decoding="async" width="1200" height="612"></div>
+        <div class="act-body"><h4>Annual Day Ceremony 2025</h4><div class="act-links"><a class="a-more" href="student-life.html#gm-ac2526">Read More <span class="sym">arrow_forward</span></a></div></div>
       </div>
     </div>
     <div class="center" style="margin-top:2.4rem"><a href="student-life.html#gallery" class="btn btn-outline">View More</a></div>

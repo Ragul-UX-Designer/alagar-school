@@ -1,0 +1,65 @@
+{
+  "_comment": "Editorial labels the generator can't infer from folder/file names. Everything else (album names, event titles, photo lists, counts, ordering) is read straight from the folders under assets/img/. Run: node tools/build-gallery.mjs",
+
+  "competitions": [
+    { "key": "talentia", "prefix": "Talentia",  "title": "Talentia",   "desc": "Our flagship talent fest celebrating music, dance, art and performance." },
+    { "key": "kidsfun",  "prefix": "Kinds-Fun", "title": "Kids' Fun",  "desc": "A joyful day of games and fun-filled activities for our youngest learners." }
+  ],
+
+  "achievement": {
+    "years": [
+      {
+        "folder": "2026-27",
+        "highlights": "TNCA Inter-District U-16 cricket stars, MSSC zonal badminton winners, the Pegasus overall champions trophy, and honours at Veetuku Oru Vinyani, PHYSCOM, CITE and the APC'ian Carnival.",
+        "order": ["2.jpg","1.jpg","1.1.jpg","5.jpg","3.jpg","4.jpg","6.jpg"],
+        "titles": {
+          "1.jpg": "TNCA U-16 Cricket",
+          "1.1.jpg": "MSSC Badminton Winners",
+          "2.jpg": "Pegasus Overall Champions",
+          "3.jpg": "Veetuku Oru Vinyani 2026",
+          "4.jpg": "PHYSCOM 2026",
+          "5.jpg": "APC'ian Carnival 2K26",
+          "6.jpg": "CITE 2026 Winners"
+        }
+      },
+      {
+        "folder": "2025-26",
+        "highlights": "Young Innovators, brilliant speakers, athletics and cricket champions and many more recent achievements.",
+        "order": ["mar9acheiv1.jpeg","mar9acheiv2.jpeg","achmarch5.jpeg","acheiverfeb2_26.jpeg","ACHIEVERSfeb1_26.jpeg","cskfeb1_26.jpeg","nov28acheivers.jpg","crickchamp1.jpg"],
+        "titles": {}
+      },
+      {
+        "folder": "2024-25",
+        "highlights": "JEE Main 2025, U-15 district cricket champions, 31st Asian Junior Squash, literary & quiz winners, CROSA, PHYSCOM and Dakshin chess honours.",
+        "order": ["alagarimg1.jpg","literary_winner.jpg","quiz winner.jpg","31st-asian.jpg","best-delegate.jpg","CROSA WINNERS.jpg","PHYSCOM 2024 WINNERS (3).jpg","alagarimage2.jpg"],
+        "titles": {
+          "literary_winner.jpg": "Literary Winners",
+          "quiz winner.jpg": "Quiz Winners",
+          "31st-asian.jpg": "Asian Junior Squash",
+          "best-delegate.jpg": "Best Delegates",
+          "CROSA WINNERS.jpg": "CROSA Winners",
+          "PHYSCOM 2024 WINNERS (3).jpg": "PHYSCOM 2024"
+        }
+      },
+      {
+        "folder": "2023-24",
+        "highlights": "Class XII Result 2023, Vibhav 2023, Vikasa winners, Squash champions, Vigilance Awareness Week and the Dakshin Sahodaya Sports overall trophy.",
+        "order": ["12thresult.jpg","vibhav 2023.jpg","vikasa winner1.jpg","squash winner.jpg","vigilance.jpg","overall.jpg","dakshin.jpg"],
+        "titles": {
+          "12thresult.jpg": "Class XII Result 2023",
+          "vibhav 2023.jpg": "Vibhav 2023",
+          "vikasa winner1.jpg": "Vikasa Winners",
+          "squash winner.jpg": "Squash Winners",
+          "vigilance.jpg": "Vigilance Week",
+          "overall.jpg": "Sports Overall Trophy",
+          "dakshin.jpg": "Dakshin Sahodaya"
+        }
+      }
+    ]
+  },
+
+  "galleryCovers": {
+    "ac2324": "Investiture-Ceremony/Investiture-Ceremony1.jpg",
+    "bb2425": "KG-Glimpse/KG-Glimpse1.jpg"
+  }
+}

@@ -2,7 +2,7 @@
 (function () {
   var REVIEWS = [
     { name: "Ramesh & Family", role: "Parents of two students", rating: 5, text: "Choosing Alagar was the best decision we made for our children. The blissful, stress-free environment combined with strong academic results gives us complete peace of mind." },
-    { name: "Lakshmi S.", role: "Parent of a Grade I student", rating: 5, text: "The personalized attention my daughter received in the Montessori block transformed her expressive abilities. She looks forward to her classes every single morning." },
+    { name: "Lakshmi S.", role: "Parent of a Grade I student", rating: 5, text: "The personalised attention my daughter received in the Montessori block transformed her expressive abilities. She looks forward to her classes every single morning." },
     { name: "Vijay K.", role: "Alumnus, Batch of 2019", rating: 5, text: "The foundation Alagar gave me carried me through my engineering degree and beyond. The teachers taught us how to think, question and lead — not just subjects." },
     { name: "Priya M.", role: "Parent of a Grade 8 student", rating: 5, text: "The teachers genuinely care. My son struggled with maths, and the patient support he received here turned it into his favourite subject." },
     { name: "Arun Prakash", role: "Alumnus, Batch of 2016", rating: 5, text: "Alagar shaped who I am today. Beyond academics, the values, discipline and confidence I gained here have stayed with me through college and work." }

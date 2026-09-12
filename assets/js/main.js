@@ -145,7 +145,7 @@
           "</ul></div>" +
         "</div>" +
         '<div class="footer-bottom">' +
-          "<p>&copy; 2026 Alagar Public School. All Rights Reserved.</p>" +
+          "<p>&copy; " + new Date().getFullYear() + " Alagar Public School. All Rights Reserved.</p>" +
           '<p><a href="privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="terms.html">Terms &amp; Conditions</a></p>' +
         "</div>" +
       "</div></footer>";
@@ -154,6 +154,9 @@
   function mount(id, html) { var el = document.getElementById(id); if (el) el.outerHTML = html; }
   mount("site-header", buildHeader());
   mount("site-footer", buildFooter());
+
+  /* auto-calculate "Years of Excellence" from the 2009 founding year */
+  (function () { var yb = document.getElementById("yearsBadge"); if (yb) { var n = new Date().getFullYear() - 2009; if (n > 0) yb.textContent = n + "+"; } })();
 
   /* SEO: structured data (School) injected once per page */
   try {

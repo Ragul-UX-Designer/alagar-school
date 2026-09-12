@@ -54,13 +54,30 @@ Videos are **self-hosted** (served from the site, played inline in the lightbox)
 **too large for git** — they are `.gitignore`d (`assets/img/Gallery/**/*.mp4`) and must be
 **uploaded to the server by hand / FTP** alongside the code, or they'll 404 in production.
 
-1. Drop the `.mp4` directly in the album's group folder (hyphens, no spaces):
+1. **Re-encode for web first.** Raw phone clips are huge (1080×1920 @ 8–21 Mbps,
+   often 60–500 MB) and will crawl on mobile. Compress to 720p H.264 with `ffmpeg`
+   (install once: `winget install Gyan.FFmpeg`) — this typically cuts size ~80% with
+   no visible quality loss and works in every browser (also converts HEVC/H.265,
+   which Chrome/Firefox can't play reliably):
+
+   ```bash
+   ffmpeg -i raw.mp4 -vf "scale=720:-2" -c:v libx264 -preset medium -crf 26 \
+          -c:a aac -b:a 128k -movflags +faststart Vegetable-Day.mp4
+   ```
+
+   * `scale=720:-2` — 720 px wide, height auto/even (keeps portrait or landscape).
+   * `+faststart` — moves the index to the front so the `#t=1` poster frame and
+     playback start instantly instead of stalling.
+   * Skip this only for clips already ≲2 Mbps / small (e.g. an existing web export).
+   * A clip over ~2–3 min stays large even at 720p — trim it or host on YouTube.
+
+2. Drop the re-encoded `.mp4` directly in the album's group folder (hyphens, no spaces):
 
    ```
    assets/img/Gallery/Buds-Blooms2026-27/Vegetable-Day.mp4
    ```
 
-2. Declare it in `tools/gallery.config.json` → `videos`, keyed by the **group folder**:
+3. Declare it in `tools/gallery.config.json` → `videos`, keyed by the **group folder**:
 
    ```json
    "videos": {
@@ -75,7 +92,7 @@ Videos are **self-hosted** (served from the site, played inline in the lightbox)
      video poster. **Leave blank** and the tile shows the video's own first frame
      (`src#t=1`) — no poster file needed.
 
-3. Run `node tools/build-gallery.mjs`.
+4. Run `node tools/build-gallery.mjs`.
 
 Video tiles appear **first** inside the album's modal (before the photo events), carry a
 **play** icon (never a zoom cue), and open the clip with native `<video>` controls in the

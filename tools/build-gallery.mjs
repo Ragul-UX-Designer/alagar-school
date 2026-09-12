@@ -68,6 +68,38 @@ function eventTitle(folder) {
   return s;
 }
 
+/* video file name -> LB key slug (alphanumerics only, so it's a valid JS identifier) */
+function videoSlug(file) {
+  return file.replace(/\.[^.]+$/, "").replace(/[^A-Za-z0-9]/g, "");
+}
+
+/* Self-hosted video tiles + lightbox entries for one gallery group.
+ * Clips are declared in gallery.config.json -> videos["<Group>"]; the .mp4 files
+ * live on disk (git-ignored) under assets/img/Gallery/<Group>/. A tile with no
+ * poster shows the video's own first frame (src#t=1); the lightbox plays it with
+ * native controls. Video tiles keep a play icon, not a zoom icon. */
+function groupVideos(group, key) {
+  const list = (cfg.videos || {})[group] || [];
+  const tiles = [], lb = [];
+  for (const v of list) {
+    const abs = path.join(ROOT, "assets/img/Gallery", group, v.file);
+    if (!fs.existsSync(abs)) { console.warn(`! video "${group}/${v.file}" not found on disk — skipped`); continue; }
+    const title = v.title || eventTitle(videoSlug(v.file));
+    const lbKey = `v_${key}_${videoSlug(v.file)}`;
+    const srcRel = `Gallery/${group}/${enc(v.file)}`;                 // relative to assets/img/
+    const posterRel = v.poster ? `Gallery/${group}/${enc(v.poster)}` : "";
+    const thumb = posterRel
+      ? `<img src="assets/img/${posterRel}" alt="${attr(title)}" loading="lazy" decoding="async">`
+      : `<video src="assets/img/${srcRel}#t=1" muted playsinline preload="metadata" tabindex="-1"></video>`;
+    tiles.push(
+      `        <button type="button" class="gitem vid-tile lb-open" data-lb="${lbKey}">${thumb}<span class="g-ov"><span class="sym">play_circle</span><span class="g-title">${esc(title)}</span></span></button>`
+    );
+    const item = `{v:A+${j(srcRel)}${posterRel ? `,poster:A+${j(posterRel)}` : ""}}`;
+    lb.push(`    ${lbKey}:{t:${j(title)},i:[${item}]},`);
+  }
+  return { tiles, lb, count: tiles.length };
+}
+
 /* ---------- 1. COMPETITIONS ---------- */
 function buildCompetitions() {
   const cards = [];
@@ -182,11 +214,15 @@ function buildGallery(groups) {
   const recentCards = [], olderChips = [], modals = [], lb = [];
   const recentYears = [...new Set(groups.map((g) => g.year))].slice(0, GAL_RECENT_YEARS); // groups are year-desc
   for (const g of groups) {
-    const coverRel = (cfg.galleryCovers || {})[g.key] || `${g.events[0].ev}/${g.events[0].imgs[0]}`;
+    const vids = groupVideos(g.group, g.key);
+    const coverRel = (cfg.galleryCovers || {})[g.key] ||
+      (g.events[0] ? `${g.events[0].ev}/${g.events[0].imgs[0]}` : "");
+    if (!coverRel) { console.warn(`! gallery group "${g.group}" has no images for a cover — skipped`); continue; }
     const cover = `assets/img/Gallery/${g.group}/${enc(coverRel)}`;
+    const vidSuffix = vids.count ? ` &middot; ${vids.count} video${vids.count === 1 ? "" : "s"}` : "";
     if (recentYears.includes(g.year)) {
       recentCards.push(
-        `        <button type="button" class="gitem album-card" data-album="${g.key}"><img src="${cover}" alt="${attr(g.name)}" loading="lazy" decoding="async"><span class="g-ov"><span class="sym">collections</span><span class="g-title">${esc(g.name)}<small>${esc(g.category)} &middot; ${g.events.length} albums</small></span></span></button>`
+        `        <button type="button" class="gitem album-card" data-album="${g.key}"><img src="${cover}" alt="${attr(g.name)}" loading="lazy" decoding="async"><span class="g-ov"><span class="sym">collections</span><span class="g-title">${esc(g.name)}<small>${esc(g.category)} &middot; ${g.events.length} albums${vidSuffix}</small></span></span></button>`
       );
     } else {
       // older years collapse into compact chips (same treatment as Young Achievers)
@@ -199,21 +235,25 @@ function buildGallery(groups) {
     const evBtns = g.events.map((e) => {
       const first = `assets/img/Gallery/${g.group}/${e.ev}/${enc(e.imgs[0])}`;
       return `        <button type="button" class="gitem lb-open" data-lb="${e.key}"><img src="${first}" alt="${attr(e.title)}" loading="lazy" decoding="async"><span class="g-ov"><span class="sym">photo_library</span><span class="g-title">${esc(e.title)}</span></span></button>`;
-    }).join("\n");
+    });
+    // videos lead the album modal, followed by the photo events
+    const gridBtns = [...vids.tiles, ...evBtns].join("\n");
+    const photosPart = `${g.photos} photos in ${g.events.length} albums${vidSuffix}`;
     modals.push(
       `<div class="gmodal" id="gm-${g.key}" aria-hidden="true" role="dialog" aria-label="${attr(g.name)} albums">\n` +
       `  <div class="gmodal__panel">\n` +
       `    <div class="gmodal__head">\n` +
-      `      <div><strong>${esc(g.name)}</strong><small>${esc(g.category)} &middot; ${g.photos} photos in ${g.events.length} albums</small></div>\n` +
+      `      <div><strong>${esc(g.name)}</strong><small>${esc(g.category)} &middot; ${photosPart}</small></div>\n` +
       `      <button type="button" class="gmodal__close" aria-label="Close albums">&times;</button>\n` +
       `    </div>\n` +
-      `    <div class="gmodal__body">\n      <div class="tile-grid">\n${evBtns}\n      </div>\n    </div>\n` +
+      `    <div class="gmodal__body">\n      <div class="tile-grid">\n${gridBtns}\n      </div>\n    </div>\n` +
       `  </div>\n</div>`
     );
     for (const e of g.events) {
       const arr = e.imgs.map((f) => `A+${j(`Gallery/${g.group}/${e.ev}/${enc(f)}`)}`).join(",");
       lb.push(`    ${e.key}:{t:${j(e.title)},i:[${arr}]},`);
     }
+    for (const line of vids.lb) lb.push(line);
   }
   let cards = `      <div class="tile-grid">\n${recentCards.join("\n")}\n      </div>`;
   if (olderChips.length) {
@@ -260,8 +300,9 @@ if (errors.length) { console.error("CONSISTENCY ERRORS:\n" + errors.join("\n"));
 
 fs.writeFileSync(HTML, html);
 const totalPhotos = groups.reduce((n, g) => n + g.photos, 0);
+const totalVideos = Object.values(cfg.videos || {}).reduce((n, arr) => n + arr.length, 0);
 console.log("student-life.html regenerated:");
 console.log(`  competitions : ${cfg.competitions.length}`);
 console.log(`  achievement  : ${cfg.achievement.years.length} years`);
-console.log(`  gallery      : ${groups.length} albums, ${groups.reduce((n, g) => n + g.events.length, 0)} events, ${totalPhotos} photos`);
+console.log(`  gallery      : ${groups.length} albums, ${groups.reduce((n, g) => n + g.events.length, 0)} events, ${totalPhotos} photos, ${totalVideos} videos`);
 groups.forEach((g) => console.log(`     - ${g.key}  ${g.name}  (${g.events.length} events, ${g.photos} photos)`));

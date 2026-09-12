@@ -61,5 +61,21 @@
   "galleryCovers": {
     "ac2324": "Investiture-Ceremony/Investiture-Ceremony1.jpg",
     "bb2425": "KG-Glimpse/KG-Glimpse1.jpg"
+  },
+
+  "_videos_comment": "Self-hosted video clips shown as tiles inside their gallery album. Keyed by the Gallery <Group> folder. Each clip: file (the .mp4, relative to assets/img/Gallery/<Group>/ — kept on disk but git-ignored, so upload it to the server too), title, and an optional poster image (relative to the same folder). With no poster the tile shows the video's own first frame. Video tiles keep a play icon, not a zoom icon.",
+  "videos": {
+    "Buds-Blooms2026-27": [
+      { "file": "Vegetables.mp4", "title": "Vegetable Day", "poster": "" },
+      { "file": "Montessori-Magic-Exploring-the-Five-Senses.mp4", "title": "Montessori Magic: Exploring the Five Senses", "poster": "" },
+      { "file": "Fathers-Day.mp4", "title": "Father's Day", "poster": "" },
+      { "file": "rhymes-recitation.mp4", "title": "Rhymes Recitation", "poster": "" },
+      { "file": "onam.mp4", "title": "Onam Celebration", "poster": "" }
+    ],
+    "Academic2026-27": [
+      { "file": "Kreeda.mp4", "title": "Kreeda", "poster": "" },
+      { "file": "Krishna-jayanthi.mp4", "title": "Krishna Jayanthi", "poster": "" },
+      { "file": "Sports-day.mp4", "title": "Sports Day", "poster": "" }
+    ]
   }
 }

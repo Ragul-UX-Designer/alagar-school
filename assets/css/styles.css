@@ -341,12 +341,15 @@ button.tb-item{background:none;border:none;cursor:default;padding:0}
    ===================================================================== */
 .gallery-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem}
 .gitem{border-radius:var(--r-s);overflow:hidden;position:relative;aspect-ratio:1;cursor:pointer;display:block}
-.gitem svg,.gitem img{width:100%;height:100%;object-fit:cover}
+.gitem svg,.gitem img,.gitem video{width:100%;height:100%;object-fit:cover;display:block;background:#0e2117}
 .gitem .g-ov{position:absolute;inset:0;background:linear-gradient(transparent 48%,rgba(16,39,26,.82));
   display:flex;flex-direction:column;justify-content:flex-end;padding:.7rem;transition:var(--tr)}
 .gitem:hover .g-ov{background:linear-gradient(rgba(16,39,26,.4),rgba(16,39,26,.85))}
 .gitem .g-ov .sym{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.7);opacity:0;color:#fff;font-size:1.9rem;transition:var(--tr)}
 .gitem:hover .g-ov .sym{opacity:1;transform:translate(-50%,-50%) scale(1)}
+/* video tiles keep an always-visible play icon (never a zoom cue) — see global standard */
+.vid-tile .g-ov .sym{opacity:1;font-size:2.6rem;text-shadow:0 2px 10px rgba(0,0,0,.55);transition:transform var(--tr)}
+.vid-tile:hover .g-ov .sym{transform:translate(-50%,-50%) scale(1.12)}
 .gitem .g-title{color:#fff;font-family:'Poppins',sans-serif;font-weight:600;font-size:.74rem;line-height:1.2}
 .soc-row{display:flex;align-items:center;justify-content:center;gap:.7rem;margin-top:2.2rem}
 .soc-row span{font-family:'Poppins',sans-serif;font-weight:600;color:var(--ink);font-size:.9rem;margin-right:.3rem}
@@ -1128,6 +1131,10 @@ a.gitem{text-decoration:none;color:inherit}
 /* student life — upgraded lightbox (caption + prev/next navigation) */
 .lightbox .lb-fig{position:relative;z-index:2;margin:0;display:flex;flex-direction:column;align-items:center;gap:.9rem;max-width:96vw}
 .lightbox .lb-fig img{max-width:92vw;max-height:80vh;border-radius:10px;box-shadow:var(--sh3);width:auto;height:auto}
+/* portrait clips: cap by *visible* viewport height (dvh dodges mobile toolbars) and
+   leave room for the caption + native controls so they're never pushed off-screen */
+.lightbox .lb-fig video{max-width:92vw;max-height:calc(100vh - 8rem);max-height:calc(100dvh - 8rem);border-radius:10px;box-shadow:var(--sh3);width:auto;height:auto;background:#000}
+.lightbox .lb-fig video[hidden]{display:none}
 .lb-cap{color:#fff;text-align:center;max-width:640px;font-size:.95rem;line-height:1.55}
 .lb-cap b{font-family:'Poppins',sans-serif;display:block;font-size:1.1rem;margin-bottom:.25rem}
 .lb-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:4;width:52px;height:52px;border-radius:50%;border:none;

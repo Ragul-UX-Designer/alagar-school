@@ -41,10 +41,9 @@
       ["Achievement", "student-life.html#achievement"],
       ["Gallery", "student-life.html#gallery"]
     ]},
-    { id: "news-events", label: "News & Events", href: "news-events.html", items: [
-      ["Latest News", "news-events.html#news"],
-      ["Calendar", "news-events.html#calendar"],
-      ["Circulars", "news-events.html#circulars"]
+    { id: "noticeboard", label: "Noticeboard", href: "noticeboard.html", items: [
+      ["Calendar", "noticeboard.html#calendar"],
+      ["Circulars", "noticeboard.html#circulars"]
     ]},
     { id: "contact", label: "Contact Us", href: "contact.html" }
   ];
@@ -118,10 +117,8 @@
             '<img src="assets/img/alagar-public-school-logo.png" alt="Alagar Public School">' +
             "<p>The best CBSE school in Thoothukudi — joyful, holistic and future-ready learning from Montessori to Grade 12. Promoted &amp; managed by the Alagar Charitable Foundation since 2009.</p>" +
             '<div class="footer-soc">' +
-              '<a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.6c-.8-.1-1.6-.15-2.4-.15-2.4 0-4 1.45-4 4.1v2.35H7.5V13h2.8v8z"/></svg></a>' +
-              '<a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.22.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.05.41 2.22.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.22-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.05.36-2.22.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.22-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.05-.41-2.22C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.22.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.05-.36 2.22-.41C8.42 2.21 8.8 2.2 12 2.2zm0 1.8c-3.15 0-3.5.01-4.74.07-.92.04-1.42.2-1.75.33-.44.17-.75.37-1.08.7-.33.33-.53.64-.7 1.08-.13.33-.29.83-.33 1.75-.06 1.21-.07 1.56-.07 4.27s.01 3.06.07 4.27c.04.92.2 1.42.33 1.75.17.44.37.75.7 1.08.33.33.64.53 1.08.7.33.13.83.29 1.75.33 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c.92-.04 1.42-.2 1.75-.33.44-.17.75-.37 1.08-.7.33-.33.53-.64.7-1.08.13-.33.29-.83.33-1.75.06-1.21.07-1.56.07-4.27s-.01-3.06-.07-4.27c-.04-.92-.2-1.42-.33-1.75a2.9 2.9 0 0 0-.7-1.08 2.9 2.9 0 0 0-1.08-.7c-.33-.13-.83-.29-1.75-.33C15.5 4.01 15.15 4 12 4zm0 3.05A4.95 4.95 0 1 1 7.05 12 4.95 4.95 0 0 1 12 7.05zm0 8.17A3.22 3.22 0 1 0 8.78 12 3.22 3.22 0 0 0 12 15.22zm6.31-8.39a1.16 1.16 0 1 1-1.16-1.15 1.16 1.16 0 0 1 1.16 1.15z"/></svg></a>' +
-              '<a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 5a1.94 1.94 0 1 1-3.88 0 1.94 1.94 0 0 1 3.88 0zM3.4 8.4h3.5V21H3.4zM9.4 8.4h3.35v1.72h.05c.47-.88 1.6-1.8 3.3-1.8 3.53 0 4.18 2.32 4.18 5.34V21h-3.5v-5.36c0-1.28-.02-2.92-1.78-2.92-1.78 0-2.05 1.39-2.05 2.83V21H9.4z"/></svg></a>' +
-              '<a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.5a3.02 3.02 0 0 0-2.12-2.14C19.5 3.85 12 3.85 12 3.85s-7.5 0-9.38.51A3.02 3.02 0 0 0 .5 6.5 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.5 3.02 3.02 0 0 0 2.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51A3.02 3.02 0 0 0 23.5 17.5 31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.5zM9.6 15.6V8.4l6.25 3.6z"/></svg></a>' +
+              '<a href="https://www.facebook.com/alagarschool/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.6c-.8-.1-1.6-.15-2.4-.15-2.4 0-4 1.45-4 4.1v2.35H7.5V13h2.8v8z"/></svg></a>' +
+              '<a href="https://www.instagram.com/alagarpublicschool_thoothukudi" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.22.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.05.41 2.22.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.22-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.05.36-2.22.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.22-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.05-.41-2.22C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.22.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.05-.36 2.22-.41C8.42 2.21 8.8 2.2 12 2.2zm0 1.8c-3.15 0-3.5.01-4.74.07-.92.04-1.42.2-1.75.33-.44.17-.75.37-1.08.7-.33.33-.53.64-.7 1.08-.13.33-.29.83-.33 1.75-.06 1.21-.07 1.56-.07 4.27s.01 3.06.07 4.27c.04.92.2 1.42.33 1.75.17.44.37.75.7 1.08.33.33.64.53 1.08.7.33.13.83.29 1.75.33 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c.92-.04 1.42-.2 1.75-.33.44-.17.75-.37 1.08-.7.33-.33.53-.64.7-1.08.13-.33.29-.83.33-1.75.06-1.21.07-1.56.07-4.27s-.01-3.06-.07-4.27c-.04-.92-.2-1.42-.33-1.75a2.9 2.9 0 0 0-.7-1.08 2.9 2.9 0 0 0-1.08-.7c-.33-.13-.83-.29-1.75-.33C15.5 4.01 15.15 4 12 4zm0 3.05A4.95 4.95 0 1 1 7.05 12 4.95 4.95 0 0 1 12 7.05zm0 8.17A3.22 3.22 0 1 0 8.78 12 3.22 3.22 0 0 0 12 15.22zm6.31-8.39a1.16 1.16 0 1 1-1.16-1.15 1.16 1.16 0 0 1 1.16 1.15z"/></svg></a>' +
             "</div>" +
           "</div>" +
           '<div class="footer-col"><h4>Quick Links</h4><ul>' +
@@ -135,8 +132,8 @@
             '<li><a href="academics.html">Academics</a></li>' +
             '<li><a href="admission.html">Admissions</a></li>' +
             '<li><a href="student-life.html">Student Life</a></li>' +
-            '<li><a href="news-events.html">News &amp; Events</a></li>' +
-            '<li><a href="news-events.html#circulars">Circulars</a></li>' +
+            '<li><a href="noticeboard.html">Noticeboard</a></li>' +
+            '<li><a href="noticeboard.html#circulars">Circulars</a></li>' +
           "</ul></div>" +
           '<div class="footer-col"><h4>Get In Touch</h4><ul class="footer-contact">' +
             "<li>" + sym("location_on") + "<span>4/42/3 Muthammal Colony Extension, Thoothukudi (Tuticorin) – 628002, Tamil Nadu.</span></li>" +
@@ -680,51 +677,15 @@
 })();
 
 
-/* ===================== INTRO VIDEO (self-hosted file or YouTube) ===================== */
+/* ===================== CAMPUS COLLAGE (tap a photo to bring it to front) ===================== */
 (function () {
-  var box = document.querySelector(".intro-video");
-  if (!box) return;
-  var id = (box.getAttribute("data-yt") || "").trim();
-  var src = (box.getAttribute("data-video") || "").trim();
-  var posterSrc = (box.getAttribute("data-poster") || "").trim();
-  if (!src && (!id || id === "YOUR_VIDEO_ID")) return; // keep clean poster until a real source is set
-  var frame = box.querySelector(".iv-frame");
-  if (!frame) return;
-  var poster = box.querySelector(".iv-poster");
-  if (poster) {
-    var note = poster.querySelector(".iv-note");
-    if (note) note.textContent = "Watch our Campus Tour";
-    var bg = src ? posterSrc : "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg";
-    if (bg) {
-      poster.style.backgroundImage = "linear-gradient(rgba(9,32,20,.15),rgba(9,32,20,.45)), url('" + bg + "')";
-      poster.style.backgroundSize = "cover";
-      poster.style.backgroundPosition = "center";
-    }
-  }
-  function play() {
-    var el;
-    if (src) {
-      el = document.createElement("video");
-      el.src = src;
-      el.controls = true;
-      el.autoplay = true;
-      el.playsInline = true;
-      el.setAttribute("playsinline", "");
-      if (posterSrc) el.poster = posterSrc;
-    } else {
-      el = document.createElement("iframe");
-      el.src = "https://www.youtube.com/embed/" + id + "?autoplay=1&rel=0&modestbranding=1&playsinline=1";
-      el.title = "Alagar Public School Campus Tour";
-      el.loading = "lazy";
-      el.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen");
-      el.setAttribute("allowfullscreen", "");
-      el.setAttribute("frameborder", "0");
-    }
-    el.style.width = "100%";
-    el.style.height = "100%";
-    frame.innerHTML = "";
-    frame.appendChild(el);
-  }
-  if (poster) poster.addEventListener("click", play);
-  else play();
+  document.querySelectorAll(".campus-collage").forEach(function (box) {
+    var imgs = box.querySelectorAll("img");
+    imgs.forEach(function (im) {
+      im.addEventListener("click", function () {
+        imgs.forEach(function (x) { x.classList.remove("front"); });
+        im.classList.add("front");
+      });
+    });
+  });
 })();

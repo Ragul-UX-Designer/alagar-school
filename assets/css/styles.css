@@ -240,9 +240,6 @@ button.tb-item{background:none;border:none;cursor:default;padding:0}
 .split{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center}
 .split.top{align-items:start}
 .about-media{position:relative}
-.about-media .am-main{width:100%;display:block;aspect-ratio:4/3.3;object-fit:cover;border-radius:20px;box-shadow:var(--sh2);position:relative;z-index:1}
-.about-media .am-sub{position:absolute;right:-8px;bottom:-26px;width:44%;aspect-ratio:4/3.2;object-fit:cover;
-  border:6px solid #fff;border-radius:16px;box-shadow:var(--sh2);z-index:3}
 .about-media .am-dots{position:absolute;top:-16px;right:-16px;width:104px;height:104px;
   background-image:radial-gradient(var(--green-l) 2.4px,transparent 2.4px);background-size:18px 18px;opacity:.5;z-index:0}
 .exp-badge{position:absolute;right:-16px;top:16px;z-index:4;background:var(--green);color:#fff;border-radius:16px;
@@ -310,16 +307,11 @@ button.tb-item{background:none;border:none;cursor:default;padding:0}
 .news:hover{box-shadow:var(--sh2);transform:translateY(-6px)}
 .news .news-img{aspect-ratio:16/10;position:relative;overflow:hidden}
 .news .news-img svg{width:100%;height:100%}
-.news .date-badge{position:absolute;left:14px;top:14px;background:var(--accent);color:#3a2600;border-radius:10px;
-  padding:.5rem .7rem;text-align:center;font-family:'Poppins',sans-serif;line-height:1;box-shadow:var(--sh1)}
-.news .date-badge strong{display:block;font-size:1.3rem;font-weight:700}
-.news .date-badge small{font-size:.66rem;font-weight:600;text-transform:uppercase}
 .news .news-body{padding:1.4rem}
 .news .news-meta{font-size:.76rem;color:var(--muted);display:flex;gap:1rem;margin-bottom:.5rem}
 .news .news-meta span{display:inline-flex;align-items:center;gap:.3rem}
 .news .news-meta .sym{font-size:1rem;color:var(--green)}
 .news .news-body h4{font-size:1.05rem;line-height:1.4;margin-bottom:.6rem}
-.news .news-desc{color:var(--muted);font-size:.9rem;line-height:1.55;margin:0}
 .news .more{font-family:'Poppins',sans-serif;font-weight:600;font-size:.82rem;color:var(--green-d);display:inline-flex;align-items:center;gap:.3rem}
 
 /* =====================================================================
@@ -347,6 +339,8 @@ button.tb-item{background:none;border:none;cursor:default;padding:0}
 .gitem:hover .g-ov{background:linear-gradient(rgba(16,39,26,.4),rgba(16,39,26,.85))}
 .gitem .g-ov .sym{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.7);opacity:0;color:#fff;font-size:1.9rem;transition:var(--tr)}
 .gitem:hover .g-ov .sym{opacity:1;transform:translate(-50%,-50%) scale(1)}
+/* touch OR narrow: zoom cue is always visible (global zoom-icon standard) */
+@media(hover:none),(max-width:640px){.gitem .g-ov .sym{opacity:1;transform:translate(-50%,-50%) scale(1)}}
 /* video tiles keep an always-visible play icon (never a zoom cue) — see global standard */
 .vid-tile .g-ov .sym{opacity:1;font-size:2.6rem;text-shadow:0 2px 10px rgba(0,0,0,.55);transition:transform var(--tr)}
 .vid-tile:hover .g-ov .sym{transform:translate(-50%,-50%) scale(1.12)}
@@ -410,7 +404,7 @@ button.tb-item{background:none;border:none;cursor:default;padding:0}
 .gallery-foot .soc-row{margin-top:0}
 
 /* welcome — second floating stat badge */
-.stat-badge{position:absolute;bottom:16px;right:-16px;z-index:4;background:#fff;border-radius:14px;box-shadow:var(--sh2);
+.stat-badge{position:absolute;bottom:90px;right:-16px;z-index:4;background:#fff;border-radius:14px;box-shadow:var(--sh2);
   padding:.7rem .9rem;display:flex;align-items:center;gap:.6rem}
 .stat-badge .sb-ico{width:42px;height:42px;border-radius:10px;background:var(--accent-tint);color:var(--accent-d);
   display:flex;align-items:center;justify-content:center}
@@ -739,12 +733,22 @@ html:not(.fonts-ready) .awards-sec::after{color:transparent!important}
 
 
 /* ===================== INTRO VIDEO ===================== */
-.about-media .intro-video{width:100%}
 .split.split-video{align-items:stretch}
 .video-media{height:100%;display:flex;flex-direction:column;justify-content:center;gap:1.1rem;
   background:linear-gradient(160deg,var(--green-tint),#ffffff 72%);border:1px solid var(--line);
   border-radius:20px;padding:1.6rem;box-shadow:var(--sh1)}
-.video-media .iv-frame{box-shadow:var(--sh2)}
+/* Welcome section — staggered campus photo trio (hover/tap a photo to bring it forward) */
+.campus-collage{position:relative;height:360px;margin-top:.5rem;overflow:visible}
+.campus-collage img{position:absolute;width:58%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block;
+  border:4px solid #fff;border-radius:14px;box-shadow:var(--sh2);cursor:pointer;
+  transition:transform .28s ease,box-shadow .28s ease}
+/* alagar-school-1 is the primary photo: largest, top-left and in front */
+.campus-collage .cc-1{top:0;left:0;width:62%;z-index:3}
+.campus-collage .cc-2{top:52px;right:0;z-index:1}
+.campus-collage .cc-3{bottom:0;left:24%;z-index:2}
+.campus-collage img:hover,.campus-collage img:focus-visible,.campus-collage img.front{
+  z-index:30;transform:scale(1.05);box-shadow:0 18px 40px rgba(0,0,0,.32);outline:none}
+@media (max-width:600px){.campus-collage{height:300px}.campus-collage img{width:64%}.campus-collage .cc-1{width:68%}}
 .vp-head{display:flex;align-items:center;gap:.75rem}
 .vp-head .vp-ico{width:46px;height:46px;border-radius:13px;background:var(--green);color:#fff;
   display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -752,16 +756,6 @@ html:not(.fonts-ready) .awards-sec::after{color:transparent!important}
 .vp-head strong{display:block;font-family:'Poppins',sans-serif;color:var(--ink);font-size:1.05rem;line-height:1.15}
 .vp-head small{color:var(--muted);font-size:.78rem}
 .vp-cap{margin:0;color:var(--muted);font-size:.9rem;line-height:1.55}
-.iv-frame{position:relative;aspect-ratio:16/9;border-radius:var(--r,18px);overflow:hidden;background:#0c1f17;box-shadow:var(--sh2,0 16px 40px rgba(0,0,0,.18))}
-.iv-frame iframe,.iv-frame video,.iv-frame .iv-poster{position:absolute;inset:0;width:100%;height:100%;border:0}
-.iv-frame video{object-fit:cover;background:#0c1f17}
-.iv-poster{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;cursor:pointer;color:#fff;
-  background:linear-gradient(135deg,var(--green-dd,#157568),var(--green-d,#1f998a))}
-.iv-play{display:inline-flex;align-items:center;justify-content:center;width:74px;height:74px;border-radius:50%;
-  background:rgba(255,255,255,.18);font-size:2.4rem;transition:transform .25s ease,background .25s ease}
-.iv-poster:hover .iv-play{transform:scale(1.08);background:rgba(255,255,255,.3)}
-.iv-note{font-size:.82rem;font-weight:600;letter-spacing:.02em;opacity:.85;padding:0 1rem;text-align:center}
-@media (max-width:600px){.iv-play{width:60px;height:60px;font-size:2rem}}
 
 /* ===================== LEARNING JOURNEY — image added to original card ===================== */
 .prog-media{aspect-ratio:16/10;overflow:hidden;background:var(--green-tint)}
@@ -930,11 +924,13 @@ html:not(.fonts-ready) .awards-sec::after{color:transparent!important}
 .zoom-img{display:block;position:relative;width:100%;border:none;padding:0;border-radius:20px;overflow:hidden;
   box-shadow:var(--sh2);cursor:zoom-in;background:var(--green-tint)}
 .zoom-img img{width:100%;height:auto;display:block}
-.zoom-img .zoom-badge{position:absolute;bottom:12px;right:12px;width:42px;height:42px;border-radius:50%;
+.zoom-img .zoom-badge{position:absolute;bottom:12px;right:12px;width:40px;height:40px;border-radius:50%;
   background:rgba(16,39,26,.72);color:#fff;display:flex;align-items:center;justify-content:center;
-  opacity:0;transform:scale(.85);transition:var(--tr)}
+  opacity:0;transform:scale(.85);transition:var(--tr);pointer-events:none}
 .zoom-img .zoom-badge .sym{font-size:1.4rem}
 .zoom-img:hover .zoom-badge,.zoom-img:focus-visible .zoom-badge{opacity:1;transform:scale(1)}
+/* touch OR narrow: zoom cue is always visible (global zoom-icon standard) */
+@media(hover:none),(max-width:640px){.zoom-img .zoom-badge{opacity:1;transform:none}}
 
 .lightbox{position:fixed;inset:0;z-index:1600;display:none;align-items:center;justify-content:center;padding:1.5rem;
   background:rgba(8,20,12,.92);cursor:zoom-out}

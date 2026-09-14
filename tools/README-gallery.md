@@ -156,6 +156,49 @@ Notes:
 
 ---
 
+## Homepage "Proud Moments" crops
+
+The homepage **Proud Moments** cards use lightweight **16:10** crops (~1080×675, under
+~200 KB) instead of the full-size Achievement posters — the posters are often large and
+square/portrait, so dropping them straight into the landscape cards crops their titles off
+and bloats the page (one poster was 9375×9375 / 3.5 MB).
+
+Each crop is saved into a **`home/` subfolder beside its source poster**, inside the
+Achievement year folder — e.g. `assets/img/Achievement/2025-26/home/toppers-12.jpg`. The
+gallery generator only scans the top-level images of each year folder, so crops in `home/`
+**never appear as extra tiles** on the achievements page.
+
+These crops are **generated from the posters** — you don't hand-cut them. The mapping lives
+in `tools/crops.config.json`:
+
+```json
+{ "src": "Achievement/2025-26/12th-topper-2025-26.jpeg", "out": "Achievement/2025-26/home/toppers-12.jpg", "focus": "top" }
+```
+
+- `src` — the poster under `assets/img/`.
+- `out` — the crop file under `assets/img/` (keep it in the year's `home/` subfolder; the
+  `home/` folder is created automatically). Reference this path from the homepage card.
+- `focus` — which part of the poster to keep: a keyword (`top`, `bottom`, `center`, `left`,
+  `right`, or combos like `top-left`) **or** two fractions `"x,y"` from 0–1 (`0,0` = top-left).
+  Posters usually want `top` so the title + hero stay in frame.
+- Optional `ratio`, `width`, `maxKB` per entry override the `defaults` block.
+
+Then run:
+
+```bash
+# preview (writes nothing):
+python tools/optimize-images.py --crops --dry-run
+
+# generate / refresh the crops:
+python tools/optimize-images.py --crops
+```
+
+To add a new Proud Moments card: add its poster to `Achievement/<year>/`, add a `crops`
+entry (with `out` pointing at that year's `home/` subfolder), run the command above, then
+point the homepage card's `<img src>` at the new `Achievement/<year>/home/*.jpg` crop.
+
+---
+
 ## Safety
 
 The script self-checks that every `data-lb` has a lightbox entry and every `data-album`

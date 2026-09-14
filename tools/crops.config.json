@@ -1,0 +1,10 @@
+{
+  "_comment": "Homepage 'Proud Moments' 16:10 teaser crops, auto-generated from the full-size Achievement posters. Run: python tools/optimize-images.py --crops  (add --dry-run to preview). Each crop is saved into a 'home/' subfolder beside its source poster, inside the Achievement year folder — the gallery generator ignores subfolders, so these crops never appear as extra tiles on the achievements page. One entry per card: 'src' (poster path under assets/img/), 'out' (crop path under assets/img/), and 'focus' — which part of the poster to keep. focus can be a keyword (top|bottom|center|left|right, or combos like 'top-left') or two fractions 'x,y' from 0-1 (0,0 = top-left). Posters usually want 'top' so the title + hero stay in frame. Optional per-entry 'ratio', 'width', 'maxKB' override the defaults below.",
+  "defaults": { "ratio": "16:10", "width": 1080, "maxKB": 200 },
+  "crops": [
+    { "src": "Achievement/2025-26/12th-topper-2025-26.jpeg", "out": "Achievement/2025-26/home/toppers-12.jpg", "focus": "top", "title": "Class XII Toppers 2025-26" },
+    { "src": "Achievement/2025-26/10th-topper-2025-26.jpeg", "out": "Achievement/2025-26/home/toppers-10.jpg", "focus": "top", "title": "Class X CBSE Toppers 2025-26" },
+    { "src": "Achievement/2026-27/jee-main-2026.jpeg", "out": "Achievement/2026-27/home/jee-2026.jpg", "focus": "top", "title": "JEE Main 2026 Qualifiers" },
+    { "src": "Achievement/2026-27/1.jpg", "out": "Achievement/2026-27/home/cricket-tnca.jpg", "focus": "top", "title": "TNCA U-16 Cricket Champions" }
+  ]
+}

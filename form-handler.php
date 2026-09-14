@@ -9,7 +9,7 @@
  *   feedback   — Parent feedback form
  *   admission  — Admission Enquiry popup
  *   campus     — Book a Campus Visit popup
- *   newsletter — News & Events subscribe form
+ *   newsletter — Noticeboard subscribe form
  *
  * Forms post here via fetch(). Same origin, so no CORS setup needed.
  */

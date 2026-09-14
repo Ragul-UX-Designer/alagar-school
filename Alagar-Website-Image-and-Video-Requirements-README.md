@@ -7,6 +7,7 @@ format they must be supplied in, and how to hand them over so they drop straight
 site without any renaming.
 
 - **Prepared:** July 9, 2026
+- **Updated:** September 15, 2026 — the homepage "Welcome" section now uses a 3-photo campus collage (`alagar-school-1/2/3.jpg`) instead of the campus video; `campus-tour.mp4` and `about-campus.jpg` have been retired.
 - **For:** School Coordinator / Media Team
 - **Submit to:** alagarschool@gmail.com (or the shared SharePoint folder)
 
@@ -40,7 +41,7 @@ The spreadsheet has five tabs:
 Two current items are flagged **Replace / upgrade**:
 
 - **`favicon.png`** – currently `194 × 64` (not square). Provide a square `512 × 512` icon.
-- **`about-campus.jpg`** (video poster) – currently `680 × 453` (low-res). Provide a `1600 × 900` HD still that matches the campus video.
+- **Welcome campus collage** (`alagar-school-1.jpg`, `alagar-school-2.jpg`, `alagar-school-3.jpg`) – currently `680 px` wide (low-res). Provide `1600 px`-wide HD landscape stills of the campus (building, grounds/sports, wide view).
 
 ---
 
@@ -55,7 +56,7 @@ assets/
 ├── img/
 │   ├── logo.png                      # header/footer logo
 │   ├── favicon.png                   # browser-tab icon
-│   ├── about-campus.jpg              # campus video poster
+│   ├── alagar-school-1/2/3.jpg        # Welcome-section campus collage (3)
 │   ├── promo-admissions.jpg          # admissions pop-up
 │   ├── chairman.jpg / correspondent.jpg / principal.jpg   # leadership portraits
 │   ├── curr-foundation/discoverers/innovators/trailblazers.jpg   # curriculum wheel (4)
@@ -66,9 +67,11 @@ assets/
 │   ├── Calendars/       <Month-Year>.jpg          # monthly calendars (11)
 │   ├── Achievement/     <Year>/*.jpg              # award photos
 │   └── Gallery/         <Year>/<Event>/*.jpg      # event albums
-└── video/
-    └── campus-tour.mp4               # campus / intro film
 ```
+
+> The homepage video was retired — there is currently **no `assets/video/` folder**. If a
+> campus film is added back later, drop the MP4 in a new `assets/video/` folder (see the
+> Video spec below).
 
 ---
 
@@ -81,7 +84,7 @@ assets/
 | Logo | 720 × 240 | 3:1 | PNG (transparent) |
 | Favicon | 512 × 512 | 1:1 | PNG + .ico |
 | Hero banners (×3) | 1040 × 1140 | ≈9:10 portrait | JPG / WebP |
-| Video poster | 1600 × 900 | 16:9 | JPG / WebP |
+| Welcome campus collage (×3) | 1600 × 1067 | 3:2 landscape | JPG / WebP |
 | Curriculum tiles (×4) | 800 × 534 | 3:2 | JPG / WebP |
 | Academic stage cards (×4) | 1200 × 750 | 16:10 | JPG / WebP |
 | Lab / facility photos | 1200 × 800 | 3:2 | JPG / WebP |
@@ -95,18 +98,17 @@ Keep photos under **300 KB** each (≈80% JPG quality) and use the **sRGB** colo
 
 ### Video
 
+> **Not currently used.** The homepage "Welcome" section now shows the 3-photo campus
+> collage instead of a video. The specs below apply only if a campus film is re-introduced.
+
 | Item | Spec |
 |------|------|
-| File | `assets/video/campus-tour.mp4` |
+| File | `assets/video/campus-tour.mp4` (create the folder) |
 | Resolution | 1920 × 1080 (Full HD) |
 | Length | 30–90 seconds |
 | Format | MP4 (H.264 video + AAC audio) |
 | Size | ≤ 15 MB (compress to ~2–4 Mbps) |
-| Poster | export a still and save it as `about-campus.jpg` |
-
-The same `campus-tour.mp4` currently powers both the homepage intro player and the
-"Watch Video" buttons on the Activities cards. To give an activity its own clip, supply a
-new file (e.g. `assets/video/annual-day.mp4`) and update its `data-video` path.
+| Poster | export a 1600 × 900 still to use as the player poster |
 
 ---
 

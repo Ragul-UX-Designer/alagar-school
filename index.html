@@ -97,17 +97,14 @@
     <div class="about-media video-media reveal">
       <span class="am-dots"></span>
       <div class="vp-head">
-        <span class="vp-ico"><span class="sym">smart_display</span></span>
-        <div><strong>Campus Tour</strong><small>A quick look at life at Alagar</small></div>
+        <span class="vp-ico"><span class="sym">photo_library</span></span>
+        <div><strong>Our Campus</strong><small>A glimpse of life at Alagar</small></div>
       </div>
-      <!-- Campus Tour recap video (Remotion-rendered, self-hosted). To change later, replace assets/video/campus-tour.mp4. -->
-      <div class="intro-video" data-video="assets/video/campus-tour.mp4" data-poster="assets/img/about-campus.jpg">
-        <div class="iv-frame">
-          <button type="button" class="iv-poster" aria-label="Play campus tour video">
-            <span class="iv-play"><span class="sym">play_arrow</span></span>
-            <span class="iv-note">Watch our Campus Tour</span>
-          </button>
-        </div>
+      <!-- Campus photo collage (staggered trio; hover/tap a photo to bring it forward). -->
+      <div class="campus-collage">
+        <img class="cc-1" src="assets/img/alagar-school-1.jpg" alt="Alagar Public School main building and green campus" width="680" height="453" loading="lazy" decoding="async" tabindex="0">
+        <img class="cc-2" src="assets/img/alagar-school-2.jpg" alt="Students playing football on the school ground" width="680" height="363" loading="lazy" decoding="async" tabindex="0">
+        <img class="cc-3" src="assets/img/alagar-school-3.jpg" alt="Wide view of the Alagar Public School campus" width="680" height="419" loading="lazy" decoding="async" tabindex="0">
       </div>
       <p class="vp-cap">See joyful, future-ready learning in action — from smart classrooms to our 6-acre green campus.</p>
       <div class="exp-badge"><strong>2009</strong><small>Established</small></div>
@@ -296,25 +293,38 @@
 <section class="section bg-soft">
   <div class="wrap">
     <div class="sec-head center">
-      <span class="eyebrow" style="justify-content:center">News &amp; Events</span>
-      <h2 class="title">Life at Alagar, lately</h2>
-      <p class="lead">Celebrating the achievements and vibrant life inside and beyond our classrooms.</p>
+      <span class="eyebrow" style="justify-content:center">Proud Moments</span>
+      <h2 class="title">Celebrating our achievers</h2>
+      <p class="lead">Celebrating the talent, hard work and success of our students that make the whole Alagar family proud.</p>
     </div>
-    <div class="cards-grid g-3">
-      <a class="news reveal" href="news-events.html#news">
-        <div class="news-img"><div class="date-badge"><strong>15</strong><small>Aug</small></div><img src="assets/img/Gallery/Academic2026-27/Independence-Day-Celebration/1.jpg" alt="Independence Day flag hoisting" style="width:100%;height:100%;object-fit:cover" loading="lazy" decoding="async" width="1080" height="1350"></div>
-        <div class="news-body"><div class="news-meta"><span><span class="sym">sell</span> Celebration</span><button type="button" class="news-share" data-share="80th Independence Day celebrated with pride" aria-label="Share this update"><span class="sym">share</span> Share</button></div><h4>80th Independence Day celebrated with pride</h4><span class="more">Read more <span class="sym">arrow_forward</span></span></div>
+    <!--
+      PROUD MOMENTS — SOURCED FROM ACHIEVEMENTS (curate by hand)
+      1. Show EXACTLY 4 cards (fixed 4-column .g-4 grid); any other count leaves an orphan.
+      2. Pull ONLY from assets/img/Achievement/ — the "big things" (board results, JEE,
+         championships, records). Everyday events/albums go in "Recent Activities" (Gallery) instead.
+      3. Order strongest/newest first; link every card to student-life.html#achievement.
+      4. Use a lightweight 16:10 crop (assets/img/proud-*.jpg), NOT the full-size poster,
+         to keep the homepage light. Set width/height to the crop's real dimensions.
+    -->
+    <div class="cards-grid g-4">
+      <a class="news reveal" href="student-life.html#achievement">
+        <div class="news-img"><img src="assets/img/proud-toppers-12.jpg" alt="Class XII CBSE board toppers 2025-26" style="width:100%;height:100%;object-fit:cover" loading="lazy" decoding="async" width="1080" height="675"></div>
+        <div class="news-body"><div class="news-meta"><span><span class="sym">sell</span> Board Results</span><button type="button" class="news-share" data-share="Class XII toppers shine in the CBSE board results" aria-label="Share this achievement"><span class="sym">share</span> Share</button></div><h4>Class XII Toppers 2025-26</h4><span class="more">View achievements <span class="sym">arrow_forward</span></span></div>
       </a>
-      <a class="news reveal" href="news-events.html#news">
-        <div class="news-img"><div class="date-badge"><strong>20</strong><small>Jul</small></div><img src="assets/img/Gallery/Academic2026-27/International-Moon-Day/1.jpg" alt="International Moon Day exhibition" style="width:100%;height:100%;object-fit:cover" loading="lazy" decoding="async" width="1080" height="1350"></div>
-        <div class="news-body"><div class="news-meta"><span><span class="sym">sell</span> Science</span><button type="button" class="news-share" data-share="Curiosity soars on International Moon Day" aria-label="Share this update"><span class="sym">share</span> Share</button></div><h4>Curiosity soars on International Moon Day</h4><span class="more">Read more <span class="sym">arrow_forward</span></span></div>
+      <a class="news reveal" href="student-life.html#achievement">
+        <div class="news-img"><img src="assets/img/proud-toppers-10.jpg" alt="Class X CBSE board toppers 2025-26" style="width:100%;height:100%;object-fit:cover" loading="lazy" decoding="async" width="1080" height="675"></div>
+        <div class="news-body"><div class="news-meta"><span><span class="sym">sell</span> Board Results</span><button type="button" class="news-share" data-share="100% result and top scores in the Class X CBSE boards" aria-label="Share this achievement"><span class="sym">share</span> Share</button></div><h4>Class X CBSE Toppers 2025-26</h4><span class="more">View achievements <span class="sym">arrow_forward</span></span></div>
       </a>
-      <a class="news reveal" href="news-events.html#news">
-        <div class="news-img"><div class="date-badge"><strong>09</strong><small>Jul</small></div><img src="assets/img/Achievement/2026-27/1.jpg" alt="TNCA U-16 cricket champions" style="width:100%;height:100%;object-fit:cover" loading="lazy" decoding="async" width="1080" height="1350"></div>
-        <div class="news-body"><div class="news-meta"><span><span class="sym">sell</span> Achievement</span><button type="button" class="news-share" data-share="Cricketers crowned TNCA U-16 champions" aria-label="Share this update"><span class="sym">share</span> Share</button></div><h4>Cricketers crowned TNCA U-16 champions</h4><span class="more">Read more <span class="sym">arrow_forward</span></span></div>
+      <a class="news reveal" href="student-life.html#achievement">
+        <div class="news-img"><img src="assets/img/proud-jee-2026.jpg" alt="JEE Main 2026 qualifiers from Alagar Public School" style="width:100%;height:100%;object-fit:cover" loading="lazy" decoding="async" width="1080" height="675"></div>
+        <div class="news-body"><div class="news-meta"><span><span class="sym">sell</span> JEE Main</span><button type="button" class="news-share" data-share="Alagar students qualify with top scores in JEE Main 2026" aria-label="Share this achievement"><span class="sym">share</span> Share</button></div><h4>JEE Main 2026 Qualifiers</h4><span class="more">View achievements <span class="sym">arrow_forward</span></span></div>
+      </a>
+      <a class="news reveal" href="student-life.html#achievement">
+        <div class="news-img"><img src="assets/img/proud-cricket-tnca.jpg" alt="TNCA Inter-Districts U-16 cricket tournament winners" style="width:100%;height:100%;object-fit:cover" loading="lazy" decoding="async" width="1080" height="675"></div>
+        <div class="news-body"><div class="news-meta"><span><span class="sym">sell</span> Sports</span><button type="button" class="news-share" data-share="Match-winning performance at the TNCA U-16 inter-district tournament" aria-label="Share this achievement"><span class="sym">share</span> Share</button></div><h4>TNCA U-16 Cricket Champions</h4><span class="more">View achievements <span class="sym">arrow_forward</span></span></div>
       </a>
     </div>
-    <div class="center" style="margin-top:2.4rem"><a href="news-events.html" class="btn btn-outline">View All News &amp; Events</a></div>
+    <div class="center" style="margin-top:2.4rem"><a href="student-life.html#achievement" class="btn btn-outline">View All Achievements</a></div>
   </div>
 </section>
 
@@ -371,8 +381,8 @@
          other count leaves an orphan card on desktop.
       2. Order NEWEST FIRST — lead with the most recent academic year, oldest last.
       3. Keep a BALANCED MIX: school events plus at least one Kindergarten
-         (Buds & Blooms) highlight. Do NOT reuse an item already shown in the
-         News & Events section, and skip Achievements here (News covers those).
+         (Buds & Blooms) highlight. This section is GALLERY events only — skip
+         Achievements (the "Proud Moments" section covers those).
       4. LINK each card to its relevant target:
            - event album  ->  student-life.html#gm-<albumKey>   (e.g. #gm-ac2627, #gm-bb2627)
            - achievement  ->  student-life.html#achievement
@@ -385,6 +395,10 @@
     -->
     <div class="cards-grid g-4">
       <div class="act-card reveal">
+        <div class="act-img"><img src="assets/img/sports-day-kreeda.jpg" alt="Annual Sports Day KREEDA 2026" loading="lazy" decoding="async" width="1080" height="674"></div>
+        <div class="act-body"><h4>Annual Sports Day 2026</h4><div class="act-links"><a class="a-more" href="student-life.html#gm-ac2627">Read More <span class="sym">arrow_forward</span></a></div></div>
+      </div>
+      <div class="act-card reveal">
         <div class="act-img"><img src="assets/img/Gallery/Academic2026-27/Investiture-Ceremony/1.jpg" alt="Investiture Ceremony 2026" loading="lazy" decoding="async" width="1080" height="1350"></div>
         <div class="act-body"><h4>Investiture Ceremony 2026</h4><div class="act-links"><a class="a-more" href="student-life.html#gm-ac2627">Read More <span class="sym">arrow_forward</span></a></div></div>
       </div>
@@ -395,10 +409,6 @@
       <div class="act-card reveal">
         <div class="act-img"><img src="assets/img/Gallery/Academic2026-27/Field-Trip-Porunai-Museum/1.jpg" alt="Field Trip to Porunai Museum" loading="lazy" decoding="async" width="1080" height="1350"></div>
         <div class="act-body"><h4>Field Trip — Porunai Museum</h4><div class="act-links"><a class="a-more" href="student-life.html#gm-ac2627">Read More <span class="sym">arrow_forward</span></a></div></div>
-      </div>
-      <div class="act-card reveal">
-        <div class="act-img"><img src="assets/img/Gallery/Academic2025-26/Annual-Day/AnnualDay1.jpg" alt="Annual Day Ceremony" loading="lazy" decoding="async" width="1200" height="612"></div>
-        <div class="act-body"><h4>Annual Day Ceremony 2025</h4><div class="act-links"><a class="a-more" href="student-life.html#gm-ac2526">Read More <span class="sym">arrow_forward</span></a></div></div>
       </div>
     </div>
     <div class="center" style="margin-top:2.4rem"><a href="student-life.html#gallery" class="btn btn-outline">View More</a></div>

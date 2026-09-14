@@ -303,24 +303,25 @@
       2. Pull ONLY from assets/img/Achievement/ — the "big things" (board results, JEE,
          championships, records). Everyday events/albums go in "Recent Activities" (Gallery) instead.
       3. Order strongest/newest first; link every card to student-life.html#achievement.
-      4. Use a lightweight 16:10 crop (assets/img/proud-*.jpg), NOT the full-size poster,
-         to keep the homepage light. Set width/height to the crop's real dimensions.
+      4. Use a lightweight 16:10 crop (assets/img/Achievement/<year>/home/*.jpg), NOT the
+         full-size poster, to keep the homepage light. Generate crops with
+         `python tools/optimize-images.py --crops` (see tools/crops.config.json).
     -->
     <div class="cards-grid g-4">
       <a class="news reveal" href="student-life.html#achievement">
-        <div class="news-img"><img src="assets/img/proud-toppers-12.jpg" alt="Class XII CBSE board toppers 2025-26" style="width:100%;height:100%;object-fit:cover" loading="lazy" decoding="async" width="1080" height="675"></div>
+        <div class="news-img"><img src="assets/img/Achievement/2025-26/home/toppers-12.jpg" alt="Class XII CBSE board toppers 2025-26" style="width:100%;height:100%;object-fit:cover" loading="lazy" decoding="async" width="1080" height="675"></div>
         <div class="news-body"><div class="news-meta"><span><span class="sym">sell</span> Board Results</span><button type="button" class="news-share" data-share="Class XII toppers shine in the CBSE board results" aria-label="Share this achievement"><span class="sym">share</span> Share</button></div><h4>Class XII Toppers 2025-26</h4><span class="more">View achievements <span class="sym">arrow_forward</span></span></div>
       </a>
       <a class="news reveal" href="student-life.html#achievement">
-        <div class="news-img"><img src="assets/img/proud-toppers-10.jpg" alt="Class X CBSE board toppers 2025-26" style="width:100%;height:100%;object-fit:cover" loading="lazy" decoding="async" width="1080" height="675"></div>
+        <div class="news-img"><img src="assets/img/Achievement/2025-26/home/toppers-10.jpg" alt="Class X CBSE board toppers 2025-26" style="width:100%;height:100%;object-fit:cover" loading="lazy" decoding="async" width="1080" height="675"></div>
         <div class="news-body"><div class="news-meta"><span><span class="sym">sell</span> Board Results</span><button type="button" class="news-share" data-share="100% result and top scores in the Class X CBSE boards" aria-label="Share this achievement"><span class="sym">share</span> Share</button></div><h4>Class X CBSE Toppers 2025-26</h4><span class="more">View achievements <span class="sym">arrow_forward</span></span></div>
       </a>
       <a class="news reveal" href="student-life.html#achievement">
-        <div class="news-img"><img src="assets/img/proud-jee-2026.jpg" alt="JEE Main 2026 qualifiers from Alagar Public School" style="width:100%;height:100%;object-fit:cover" loading="lazy" decoding="async" width="1080" height="675"></div>
+        <div class="news-img"><img src="assets/img/Achievement/2026-27/home/jee-2026.jpg" alt="JEE Main 2026 qualifiers from Alagar Public School" style="width:100%;height:100%;object-fit:cover" loading="lazy" decoding="async" width="1080" height="675"></div>
         <div class="news-body"><div class="news-meta"><span><span class="sym">sell</span> JEE Main</span><button type="button" class="news-share" data-share="Alagar students qualify with top scores in JEE Main 2026" aria-label="Share this achievement"><span class="sym">share</span> Share</button></div><h4>JEE Main 2026 Qualifiers</h4><span class="more">View achievements <span class="sym">arrow_forward</span></span></div>
       </a>
       <a class="news reveal" href="student-life.html#achievement">
-        <div class="news-img"><img src="assets/img/proud-cricket-tnca.jpg" alt="TNCA Inter-Districts U-16 cricket tournament winners" style="width:100%;height:100%;object-fit:cover" loading="lazy" decoding="async" width="1080" height="675"></div>
+        <div class="news-img"><img src="assets/img/Achievement/2026-27/home/cricket-tnca.jpg" alt="TNCA Inter-Districts U-16 cricket tournament winners" style="width:100%;height:100%;object-fit:cover" loading="lazy" decoding="async" width="1080" height="675"></div>
         <div class="news-body"><div class="news-meta"><span><span class="sym">sell</span> Sports</span><button type="button" class="news-share" data-share="Match-winning performance at the TNCA U-16 inter-district tournament" aria-label="Share this achievement"><span class="sym">share</span> Share</button></div><h4>TNCA U-16 Cricket Champions</h4><span class="more">View achievements <span class="sym">arrow_forward</span></span></div>
       </a>
     </div>

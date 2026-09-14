@@ -10,9 +10,10 @@
     "years": [
       {
         "folder": "2026-27",
-        "highlights": "TNCA Inter-District U-16 cricket stars, MSSC zonal badminton winners, the Pegasus overall champions trophy, and honours at Veetuku Oru Vinyani, PHYSCOM, CITE and the APC'ian Carnival.",
-        "order": ["2.jpg","1.jpg","1.1.jpg","5.jpg","3.jpg","4.jpg","6.jpg"],
+        "highlights": "JEE Main 2026 qualifiers, TNCA Inter-District U-16 cricket stars, MSSC zonal badminton winners, the Pegasus overall champions trophy, and honours at Veetuku Oru Vinyani, PHYSCOM, CITE and the APC'ian Carnival.",
+        "order": ["jee-main-2026.jpeg","2.jpg","1.jpg","1.1.jpg","5.jpg","3.jpg","4.jpg","6.jpg"],
         "titles": {
+          "jee-main-2026.jpeg": "JEE Main 2026",
           "1.jpg": "TNCA U-16 Cricket",
           "1.1.jpg": "MSSC Badminton Winners",
           "2.jpg": "Pegasus Overall Champions",
@@ -24,15 +25,28 @@
       },
       {
         "folder": "2025-26",
-        "highlights": "Young Innovators, brilliant speakers, athletics and cricket champions and many more recent achievements.",
-        "order": ["mar9acheiv1.jpeg","mar9acheiv2.jpeg","achmarch5.jpeg","acheiverfeb2_26.jpeg","ACHIEVERSfeb1_26.jpeg","cskfeb1_26.jpeg","nov28acheivers.jpg","crickchamp1.jpg"],
-        "titles": {}
+        "highlights": "Outstanding Class X & XII CBSE board results and JEE Main 2025 qualifiers, Silambam & Abacus world-record attempts, national Silambam and state-level karate champions, CSK Trophy and MSSC Zone II cricket titles, and Fishnova winners.",
+        "order": ["12th-topper-2025-26.jpeg","10th-topper-2025-26.jpeg","jee-main-2025.jpg","cskfeb1_26.jpeg","crickchamp1.jpg","ACHIEVERSfeb1_26.jpeg","achmarch5.jpeg","nov28acheivers.jpg","acheiverfeb2_26.jpeg","mar9acheiv1.jpeg","mar9acheiv2.jpeg"],
+        "titles": {
+          "12th-topper-2025-26.jpeg": "Class XII Toppers 2025-26",
+          "10th-topper-2025-26.jpeg": "Class X CBSE Toppers 2025-26",
+          "jee-main-2025.jpg": "JEE Main 2025",
+          "cskfeb1_26.jpeg": "CSK Trophy 2026 Champions",
+          "crickchamp1.jpg": "MSSC Zone II Cricket Winners",
+          "ACHIEVERSfeb1_26.jpeg": "National Silambam Championship 2025",
+          "achmarch5.jpeg": "State-Level Karate Championship 2026",
+          "nov28acheivers.jpg": "Pearl's Soccer Tournament Runners-Up",
+          "acheiverfeb2_26.jpeg": "Fishnova 2026 Winners",
+          "mar9acheiv1.jpeg": "Silambam World Record Attempt",
+          "mar9acheiv2.jpeg": "Abacus World Record Attempt"
+        }
       },
       {
         "folder": "2024-25",
-        "highlights": "JEE Main 2025, U-15 district cricket champions, 31st Asian Junior Squash, literary & quiz winners, CROSA, PHYSCOM and Dakshin chess honours.",
-        "order": ["alagarimg1.jpg","literary_winner.jpg","quiz winner.jpg","31st-asian.jpg","best-delegate.jpg","CROSA WINNERS.jpg","PHYSCOM 2024 WINNERS (3).jpg","alagarimage2.jpg"],
+        "highlights": "CSK-TDCA U-15 district cricket champions, 31st Asian Junior Squash, literary & quiz winners, CROSA, PHYSCOM and Dakshin chess honours.",
+        "order": ["alagarimg1.jpg","literary_winner.jpg","quiz winner.jpg","31st-asian.jpg","best-delegate.jpg","CROSA WINNERS.jpg","PHYSCOM 2024 WINNERS (3).jpg"],
         "titles": {
+          "alagarimg1.jpg": "CSK-TDCA U-15 District Cricket Champions",
           "literary_winner.jpg": "Literary Winners",
           "quiz winner.jpg": "Quiz Winners",
           "31st-asian.jpg": "Asian Junior Squash",

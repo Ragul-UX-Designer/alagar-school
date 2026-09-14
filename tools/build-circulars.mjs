@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /*
  * build-circulars.mjs — Folder-scan generator for the Circulars & Notices
- * list in news-events.html.
+ * list in noticeboard.html.
  * -----------------------------------------------------------------------
  * Regenerates the region between the `AUTO:circulars` markers directly from
  * the files in assets/docs/circulars/. To post a new circular:
@@ -11,7 +11,7 @@
  *          or:  YYYY-MM-DD Title ~ Subtitle.pdf
  *      e.g.     2027-03-12 Annual Day 2027 Schedule ~ For parents of all classes.pdf
  *   2. Run:  node tools/build-circulars.mjs
- *   3. Commit the new file + the updated news-events.html.
+ *   3. Commit the new file + the updated noticeboard.html.
  *
  * Newest date first. The date drives the little day/month chip, the Title is
  * bolded, the optional "~ Subtitle" becomes the grey line under it, and the
@@ -29,7 +29,7 @@ import path from "node:path";
 import url from "node:url";
 
 const ROOT = path.resolve(url.fileURLToPath(new URL("..", import.meta.url)));
-const HTML = path.join(ROOT, "news-events.html");
+const HTML = path.join(ROOT, "noticeboard.html");
 const DIR_REL = "assets/docs/circulars";
 const DIR = path.join(ROOT, DIR_REL);
 const FILE_EXT = /\.(pdf|jpe?g|png|webp)$/i;
@@ -44,7 +44,7 @@ const enc = (p) => p.split("/").map(encodeURIComponent).join("/"); // encode eac
 
 function replaceRegion(html, name, inner) {
   const re = new RegExp(`([ \\t]*<!--\\s*AUTO:${name}:start[\\s\\S]*?-->)[\\s\\S]*?([ \\t]*<!--\\s*AUTO:${name}:end\\s*-->)`);
-  if (!re.test(html)) throw new Error(`Markers for AUTO:${name} not found in news-events.html`);
+  if (!re.test(html)) throw new Error(`Markers for AUTO:${name} not found in noticeboard.html`);
   return html.replace(re, (_m, s, e) => {
     const indent = (s.match(/^[ \t]*/) || [""])[0];        // start-marker indentation
     return `${s}\n${inner}\n${indent}${e.replace(/^[ \t]*/, "")}`; // match it on the end marker
@@ -103,9 +103,9 @@ html = replaceRegion(html, "circulars", inner);
 fs.writeFileSync(HTML, html);
 
 if (!items.length) {
-  console.log(`news-events.html regenerated: no circulars — showing the empty-state placeholder.`);
+  console.log(`noticeboard.html regenerated: no circulars — showing the empty-state placeholder.`);
   console.log(`  Drop files named "YYYY-MM-DD Title[ ~ Subtitle].pdf" in ${DIR_REL}/ and re-run to list them.`);
 } else {
-  console.log(`news-events.html regenerated: ${items.length} circular(s)`);
+  console.log(`noticeboard.html regenerated: ${items.length} circular(s)`);
   items.forEach((it) => console.log(`  - ${it.sort}  ${it.title}${it.sub ? "  (" + it.sub + ")" : ""}`));
 }

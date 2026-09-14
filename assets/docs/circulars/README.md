@@ -30,9 +30,9 @@ From the project root:
 node tools/build-circulars.mjs
 ```
 
-This regenerates the **Circulars & Notices** list in `news-events.html` (newest
+This regenerates the **Circulars & Notices** list in `noticeboard.html` (newest
 date first) with each item linking straight to its file. Then commit the new
-file **and** the updated `news-events.html`.
+file **and** the updated `noticeboard.html`.
 
 ## Notes
 
